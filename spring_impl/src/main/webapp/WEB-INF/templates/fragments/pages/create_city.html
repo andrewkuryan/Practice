@@ -1,0 +1,17 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:text="#{create_city}"
+        th:fragment="title">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="content">
+    <!--/*@thymesVar id="city" type="org.fekz115.task8.domain.City"*/-->
+    <form method="post" th:object="${city}" th:action="@{/city}">
+        <input type="hidden" th:field="*{id}">
+        <label th:text="#{city_name}" for="name"></label>
+        <input type="text" id="name" th:field="*{name}">
+        <input type="submit" th:value="#{accept}">
+    </form>
+</th:block>

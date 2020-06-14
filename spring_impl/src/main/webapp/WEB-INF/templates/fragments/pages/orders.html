@@ -1,0 +1,40 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:text="#{orders}"
+        th:fragment="title">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        th:fragment="content">
+    <!--/*@thymesVar id="orders" type="java.lang.Iterable<org.fekz115.task8.domain.Order>"*/-->
+
+    <table>
+        <tr>
+            <th th:text="#{user}"></th>
+            <th th:text="#{product_name}"></th>
+            <th th:text="#{city}"></th>
+            <th th:text="#{office}"></th>
+            <th th:text="#{date}"></th>
+            <th th:text="#{is_received}"></th>
+            <th:block sec:authorize="hasAuthority('MANAGER')">
+                <th></th>
+                <th></th>
+            </th:block>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.getUser().getLogin()}"></td>
+            <td><a th:href="@{/product/{productId}(productId=${order.getProduct().getId()})}" th:text="${order.getProduct().getName()}"></a></td>
+            <td th:text="${order.getOffice().getCity().getName()}"></td>
+            <td th:text="${order.getOffice().getAddress()}"></td>
+            <td th:text="${order.getOrderDate()}"></td>
+            <td th:text="${order.isReceived()}"></td>
+            <th:block sec:authorize="hasAuthority('MANAGER')">
+                <td><a th:href="@{/order/mark/{id}(id=${order.getId()})}" th:text="#{mark_received}"></a></td>
+                <td><a th:href="@{/order/remove/{id}(id=${order.getId()})}" th:text="#{remove}"></a></td>
+            </th:block>
+        </tr>
+    </table>
+
+</th:block>

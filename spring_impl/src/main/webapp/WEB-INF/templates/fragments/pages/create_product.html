@@ -1,0 +1,38 @@
+<title xmlns:th="http://www.thymeleaf.org"
+       th:fragment="title"
+       th:text="#{products}">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="content">
+    <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
+    <p th:text="#{create_new} + ' ' + ${category.getName()}"></p>
+    <!--/*@thymesVar id="product" type="org.fekz115.task8.domain.Product"*/-->
+    <form th:object="${product}" method="post" th:action="@{/product/create}" enctype="multipart/form-data">
+
+        <input type="hidden" th:field="*{id}">
+
+        <input type="hidden" name="categoryId" th:value="${category.getId()}">
+
+        <label th:text="#{product_name}" for="name"></label>
+        <input type="text" id="name" th:field="*{name}">
+
+        <label th:text="#{photos}" for="photos"></label>
+        <input type="file" name="images" id="photos" accept="image/*" multiple>
+
+        <label th:text="#{description}" for="description"></label>
+        <input type="text" id="description" th:field="*{description}">
+
+        <label for="cost" th:text="#{cost}"></label>
+        <input type="number" th:field="*{cost}" id="cost">
+
+        <div th:each="specification : ${category.getSpecifications()}">
+            <label th:text="${specification.getName()}" th:for="${specification.getId()}"></label>
+            <input type="text" th:name="${specification.getId()}" th:value="${T(org.fekz115.task8.util.Utils).getSpecificationValue(product, specification)}">
+            <span th:text="${specification.getUnits()}"></span>
+        </div>
+
+        <input type="submit" th:value="#{accept}">
+    </form>
+</th:block>

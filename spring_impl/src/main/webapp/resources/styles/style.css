@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    font-family: Arial, serif;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    height: 100%;
+    float: left;
+}
+
+li > a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1.2em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+li > a:hover {
+    background-color: #111;
+}
+
+.authDiv a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 0.4em;
+}
+
+.authDiv a:hover {
+    background-color: white;
+    color: black;
+}
+
+.userName {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-right: 2em;
+    margin-left: 2em;
+}
+
+.logoutForm {
+    display: inline-block;
+}
+
+.cartA {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 0.4em;
+}
+
+.cartA:hover {
+    background-color: white;
+    color: black;
+}
+
+.userDiv div {
+    display: inline-block;
+    margin: 0.5em;
+}
+
+.userInfo {
+    text-align: right;
+    margin: 0.3em;
+}
+
+footer {
+    text-align: center;
+}
+
+.content {
+    margin: 5% 15%;
+    min-height: 60vh;
+    border: 2px solid gray;
+    border-radius: 5px;
+    box-shadow: gray;
+}
+
+table {
+    width: 92%;
+    margin: 4%;
+    table-layout: fixed;
+}
+
+th {
+    font-weight: bold;
+    background-color: #EEE;
+}
+
+tr, td, th {
+    text-align: left;
+    padding: 0.4em;
+    border-bottom: 1px solid gray;
+    width: 0;
+}
+
+h3 {
+    margin: 4%;
+    color: gray;
+}
+
+.content a {
+    margin: 4%;
+    color: gray;
+    text-decoration: none;
+}
+
+.content a:hover {
+    margin: 4%;
+    color: black;
+    text-decoration: none;
+}
+
+.content * {
+    margin: 3%;
+}
+
+.content form * {
+    display: block;
+    margin: 3%;
+}

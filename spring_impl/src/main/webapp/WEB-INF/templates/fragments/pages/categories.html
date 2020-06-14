@@ -1,0 +1,31 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:text="#{categories}"
+        th:fragment="title">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        th:fragment="content">
+    <!--/*@thymesVar id="categories" type="java.lang.Iterable<org.fekz115.task8.domain.Category>"*/-->
+    <table>
+        <tr>
+            <th th:text="#{category_name}"></th>
+            <th:block sec:authorize="hasAuthority('ADMIN')">
+                <th></th>
+                <th></th>
+            </th:block>
+        </tr>
+        <tr th:each="category : ${categories}">
+            <td><a th:text="${category.name}" th:href="@{/category/{id}(id=${category.getId()})}"></a></td>
+            <th:block sec:authorize="hasAuthority('ADMIN')">
+                <td><a th:href="@{/category/edit/{id}(id=${category.getId()})}" th:text="#{edit}"></a></td>
+                <td><a th:href="@{/category/remove/{id}(id=${category.getId()})}" th:text="#{remove}"></a></td>
+            </th:block>
+        </tr>
+    </table>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/category/create}" th:text="#{create_category}"></a>
+    </div>
+</th:block>

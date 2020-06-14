@@ -1,0 +1,11 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="header_commons">
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <script th:src="@{/scripts/cart.js}"></script>
+    <!--/*@thymesVar id="orderedSuccessful" type="java.lang.Boolean"*/-->
+    <script>
+        if("[[${orderedSuccessful}]]") {
+            onSuccessfulOrdering();
+        }
+    </script>
+</th:block>

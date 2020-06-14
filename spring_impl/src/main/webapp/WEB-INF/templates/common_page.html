@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <!--/*@thymesVar id="page" type="java.lang.String"*/-->
+    <head>
+        <th:block th:insert="fragments/commons/header_commons :: header_commons"></th:block>
+        <th:block th:insert="~{'fragments/pages/' + ${page} :: title}"></th:block>
+    </head>
+
+    <body>
+        <header th:insert="fragments/commons/nav_menu :: nav_menu"></header>
+        <section th:insert="fragments/commons/message :: message"></section>
+        <section th:class="content" th:insert="~{'fragments/pages/' + ${page} :: content}"></section>
+        <footer th:insert="fragments/commons/footer :: footer"></footer>
+    </body>
+
+</html>

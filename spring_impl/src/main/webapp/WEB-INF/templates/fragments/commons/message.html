@@ -1,0 +1,6 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="message">
+    <!--/*@thymesVar id="message" type="java.lang.String"*/-->
+    <!--/*@thymesVar id="exception" type="org.fekz115.task8.service.exception.ServiceException"*/-->
+    <div th:if="${exception != null}" th:text="#{${exception.getMessage()}}"></div>
+    <div th:if="${message != null}" th:text="${message}"></div>
+</div>

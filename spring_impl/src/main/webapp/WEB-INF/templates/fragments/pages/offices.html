@@ -1,0 +1,35 @@
+<title xmlns:th="http://www.thymeleaf.org"
+       th:fragment="title"
+       th:text="#{offices}">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        th:fragment="content">
+    <!--/*@thymesVar id="cities" type="java.lang.Iterable<org.fekz115.task8.domain.City>"*/-->
+    <div th:each="city : ${cities}">
+        <h3 th:text="${city.getName()}"></h3>
+        <table th:if="${!city.getOffices().isEmpty()}">
+            <tr>
+                <th th:text="#{address}"></th>
+                <th th:text="#{phone_number}"></th>
+                <th:block sec:authorize="hasAuthority('ADMIN')">
+                    <th></th>
+                    <th></th>
+                </th:block>
+            </tr>
+            <tr th:each="office : ${city.getOffices()}">
+                <td th:text="${office.getAddress()}"></td>
+                <td th:text="${office.getPhone()}"></td>
+                <th:block sec:authorize="hasAuthority('ADMIN')">
+                    <td><a th:href="@{/office/edit/{id}(id=${office.getId()})}" th:text="#{edit}"></a></td>
+                    <td><a th:href="@{/office/remove/{id}(id=${office.getId()})}" th:text="#{remove}"></a></td>
+                </th:block>
+            </tr>
+        </table>
+    </div>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/office/create}" th:text="#{create_office}"></a>
+    </div>
+</th:block>

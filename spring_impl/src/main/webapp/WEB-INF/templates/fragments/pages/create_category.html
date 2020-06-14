@@ -1,0 +1,15 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:text="#{create_category}"
+        th:fragment="title"></title>
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="content">
+    <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
+    <form method="post" th:object="${category}" th:action="@{/category}">
+        <input type="hidden" th:field="*{id}">
+        <label th:text="#{category_name}" for="name"></label>
+        <input type="text" id="name" th:field="*{name}">
+        <input type="submit" th:value="#{accept}">
+    </form>
+</th:block>

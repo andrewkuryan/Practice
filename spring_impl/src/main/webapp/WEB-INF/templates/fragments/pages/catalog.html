@@ -1,0 +1,15 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:text="#{catalog}"
+        th:fragment="title">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="content">
+    <!--/*@thymesVar id="categories" type="java.lang.Iterable<org.fekz115.task8.domain.Category>"*/-->
+    <div th:each="category : ${categories}">
+        <h3 th:text="${category.getName()}"></h3>
+        <th:block th:insert="fragments/pages/products :: content"></th:block>
+    </div>
+</th:block>

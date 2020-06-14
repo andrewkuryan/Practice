@@ -1,0 +1,26 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:text="#{create_specification}"
+        th:fragment="title">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="content">
+    <!--/*@thymesVar id="specification" type="org.fekz115.task8.domain.Specification"*/-->
+    <form th:object="${specification}" method="post" th:action="@{/specification}">
+        <input type="hidden" th:field="*{id}">
+        <label for="name" th:text="#{specification_name}"></label>
+        <input type="text" id="name" th:field="*{name}">
+        <label for="units" th:text="#{units}"></label>
+        <input type="text" id="units" th:field="*{units}">
+        <label for="description"></label>
+        <textarea th:field="*{description}" id="description" th:value="*{description}"></textarea>
+        <label for="categoryId" th:text="#{category}"></label>
+        <select name="categoryId" id="categoryId">
+            <!--/*@thymesVar id="categories" type="java.lang.Iterable<org.fekz115.task8.domain.Category>"*/-->
+            <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}" th:selected="${specification.getCategory()?.getId()} == ${category.getId()}"></option>
+        </select>
+        <input type="submit" th:value="#{accept}">
+    </form>
+</th:block>

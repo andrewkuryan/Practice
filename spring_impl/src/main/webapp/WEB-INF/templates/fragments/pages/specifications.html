@@ -1,0 +1,38 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:text="#{specifications}"
+        th:fragment="title">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        th:fragment="content">
+    <!--/*@thymesVar id="categories" type="java.lang.Iterable<org.fekz115.task8.domain.Category>"*/-->
+    <div th:each="category : ${categories}">
+        <h3 th:text="${category.getName()}"></h3>
+        <table th:if="${!category.getSpecifications().isEmpty()}">
+            <tr>
+                <th th:text="#{specification_name}"></th>
+                <th th:text="#{units}"></th>
+                <th th:text="#{description}"></th>
+                <th:block sec:authorize="hasAuthority('ADMIN')">
+                    <th></th>
+                    <th></th>
+                </th:block>
+            </tr>
+            <tr th:each="specification : ${category.getSpecifications()}">
+                <td th:text="${specification.getName()}"></td>
+                <td th:text="${specification.getUnits()}"></td>
+                <td th:text="${specification.getDescription()}"></td>
+                <th:block sec:authorize="hasAuthority('ADMIN')">
+                    <td><a th:href="@{/specification/edit/{id}(id=${specification.getId()})}" th:text="#{edit}"></a></td>
+                    <td><a th:href="@{/specification/remove/{id}(id=${specification.getId()})}" th:text="#{remove}"></a></td>
+                </th:block>
+            </tr>
+        </table>
+    </div>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/specification/create}" th:text="#{create_specification}"></a>
+    </div>
+</th:block>

@@ -1,0 +1,61 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:text="#{cart}"
+        th:fragment="title">
+</title>
+
+<th:block
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="content">
+
+    <div>
+        <table id="productList"></table>
+        <div id="cost"></div>
+    </div>
+
+    <form id="createOrderForm" method="post" th:action="@{/order/create}">
+        <!--/*@thymesVar id="offices" type="java.lang.Iterable<org.fekz115.task8.domain.Office>"*/-->
+        <label for="office" th:text="#{office}"></label>
+        <select name="officeId" id="office">
+            <option th:each="office : ${offices}" th:text="${office.getCity().getName()} + ' ' + ${office.getAddress()}" th:value="${office.getId()}"></option>
+        </select>
+        <input id="submitButton" type="submit" th:value="#{accept}">
+    </form>
+
+
+    <script>
+
+        function renderProductList() {
+            let table = document.getElementById("productList");
+            let costDiv = document.getElementById("cost");
+            let cost = 0;
+            getProductList().forEach((item) => {
+                let tr = document.createElement("tr");
+                let td1 = document.createElement("td");
+                td1.innerText = item.name;
+                tr.appendChild(td1);
+                let td2 = document.createElement("td");
+                td2.innerText = `${item.cost}$`;
+                tr.appendChild(td2);
+                table.appendChild(tr);
+                cost += parseInt(item.cost, 10);
+            });
+            costDiv.innerText = `${cost}$`;
+        }
+
+        if(getProductList() == null || getProductList().length < 1) {
+            document.getElementById("submitButton").disabled = "disabled";
+        } else {
+            let form = document.getElementById("createOrderForm");
+            getProductList().forEach((item, index) => {
+                let products = document.createElement("input");
+                products.type = "hidden";
+                products.name = `products[]`;
+                products.value = item.id;
+                form.appendChild(products);
+            });
+            renderProductList();
+        }
+    </script>
+
+</th:block>
