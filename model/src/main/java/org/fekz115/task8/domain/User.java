@@ -1,6 +1,7 @@
 package org.fekz115.task8.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     private String email;
     private String phoneNumber;

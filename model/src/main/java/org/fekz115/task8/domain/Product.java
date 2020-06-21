@@ -1,6 +1,7 @@
 package org.fekz115.task8.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,24 +22,26 @@ public class Product {
     @OneToMany(
             mappedBy = "product",
             fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade=CascadeType.REMOVE,
+            cascade=CascadeType.PERSIST,
             orphanRemoval=true
     )
-    private Set<Order> orders;
+    private Set<Order> orders= new HashSet<>();
 
     @OneToMany(
             mappedBy = "product",
             fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade=CascadeType.REMOVE,
-            orphanRemoval=true
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true
     )
-    private Set<ProductSpecification> specifications;
+    private Set<ProductSpecification> specifications= new HashSet<>();
 
     @OneToMany(
             mappedBy = "product",
-            fetch = FetchType.EAGER //TODO: make LAZY
+            fetch = FetchType.EAGER, //TODO: make LAZY
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true
     )
-    private Set<Photo> photos;
+    private Set<Photo> photos= new HashSet<>();
 
     public int getId() {
         return id;

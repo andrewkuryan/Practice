@@ -1,6 +1,8 @@
 package org.fekz115.task8.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Specification {
@@ -16,6 +18,22 @@ public class Specification {
     @ManyToOne
     @JoinColumn(name = "categoryId")
     private Category category;
+
+    @OneToMany(
+            mappedBy = "product",
+            fetch = FetchType.EAGER, //TODO: make LAZY
+            cascade=CascadeType.PERSIST,
+            orphanRemoval=true
+    )
+    private Set<ProductSpecification> specifications = new HashSet<>();
+
+    public Set<ProductSpecification> getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(Set<ProductSpecification> specifications) {
+        this.specifications = specifications;
+    }
 
     public int getId() {
         return id;

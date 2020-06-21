@@ -1,5 +1,8 @@
 package org.fekz115.task8.domain;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +11,7 @@ import java.util.Set;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String name;
@@ -16,16 +19,16 @@ public class Category {
     @OneToMany(
             mappedBy = "category",
             fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade=CascadeType.REMOVE,
-            orphanRemoval=true
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true
     )
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 
     @OneToMany(
             mappedBy = "category",
             fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade=CascadeType.REMOVE,
-            orphanRemoval=true
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true
     )
     private Set<Specification> specifications = new HashSet<>();
 
@@ -60,4 +63,5 @@ public class Category {
     public Set<Specification> getSpecifications() {
         return specifications;
     }
+
 }

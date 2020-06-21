@@ -19,7 +19,9 @@ public class CategoryService {
         if(repository.existsByNameAndIdNot(category.getName(), category.getId())) {
             throw new CategoryWithTheSameNameExistsException();
         } else {
-            repository.save(category);
+            var entity = repository.findById(category.getId()).orElse(category);
+            entity.setName(category.getName());
+            repository.save(entity);
         }
     }
 

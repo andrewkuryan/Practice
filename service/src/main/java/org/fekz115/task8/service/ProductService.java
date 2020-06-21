@@ -16,7 +16,11 @@ public class ProductService {
     }
 
     public void save(Product product) throws ServiceException {
-        repository.save(product);
+        var entity = repository.findById(product.getId()).orElse(product);
+        entity.setCost(product.getCost());
+        entity.setName(product.getName());
+        entity.setDescription(product.getDescription());
+        repository.save(entity);
     }
 
     public Optional<Product> getProduct(Product product) {

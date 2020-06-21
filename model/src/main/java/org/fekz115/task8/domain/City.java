@@ -1,6 +1,7 @@
 package org.fekz115.task8.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,10 +16,10 @@ public class City {
     @OneToMany(
             mappedBy = "city",
             fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade=CascadeType.REMOVE,
+            cascade=CascadeType.PERSIST,
             orphanRemoval=true
     )
-    private Set<Office> offices;
+    private Set<Office> offices = new HashSet<>();
 
     public int getId() {
         return id;

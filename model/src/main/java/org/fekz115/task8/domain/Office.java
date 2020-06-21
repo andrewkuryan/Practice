@@ -13,7 +13,7 @@ public class Office {
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name="cityId", nullable=false)
+    @JoinColumn(name="cityId")
     private City city;
 
     public City getCity() {

@@ -21,7 +21,9 @@ public class CityService {
         if(repository.existsByNameAndIdNot(city.getName(), city.getId())) {
             throw new CityWithTheSameNameExistsException();
         } else {
-            repository.save(city);
+            var entity = repository.findById(city.getId()).orElse(city);
+            entity.setName(city.getName());
+            repository.save(entity);
         }
     }
 

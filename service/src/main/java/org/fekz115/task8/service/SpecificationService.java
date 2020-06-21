@@ -20,7 +20,11 @@ public class SpecificationService {
         if(repository.existsByNameAndCategoryAndIdNot(specification.getName(), specification.getCategory(), specification.getId())) {
             throw new SpecificationWithTheSameNameAlreadyExistsException();
         } else {
-            repository.save(specification);
+            var entity = repository.findById(specification.getId()).orElse(specification);
+            entity.setName(specification.getName());
+            entity.setUnits(specification.getUnits());
+            entity.setDescription(specification.getDescription());
+            repository.save(entity);
         }
     }
 
