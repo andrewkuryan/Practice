@@ -152,3 +152,6 @@ buildNumber.properties
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/java,java-web,maven,intellij,visualstudiocode
+
+pom.xml
+spring_impl/src/main/resources/application.properties
