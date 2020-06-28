@@ -12,6 +12,7 @@ public class Order {
     private int id;
     private boolean isReceived;
     private Date orderDate;
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "productId")
@@ -20,10 +21,6 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "officeId")
-    private Office office;
 
     public int getId() {
         return id;
@@ -65,11 +62,11 @@ public class Order {
         this.user = user;
     }
 
-    public Office getOffice() {
-        return office;
+    public String getAddress() {
+        return address;
     }
 
-    public void setOffice(Office office) {
-        this.office = office;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

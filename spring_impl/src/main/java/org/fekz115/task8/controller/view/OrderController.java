@@ -41,7 +41,6 @@ public class OrderController {
 
     @GetMapping("/cart")
     public String cart(Model model) {
-        model.addAttribute("offices", officeService.getAll());
         model.addAttribute("page", "cart");
         return "common_page";
     }
@@ -49,15 +48,13 @@ public class OrderController {
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('USER')")
     public String createOrder(
-            Integer officeId,
+            String address,
             @RequestParam(value = "products[]") List<Integer> products,
             Principal principal,
             Model model
     ) {
         Optional<User> user = userService.getUserByLogin(principal.getName());
         if (user.isPresent()) {
-            Office office = new Office();
-            office.setId(officeId);
             products.stream()
                     .map(x -> {
                         Product p = new Product();
@@ -65,7 +62,7 @@ public class OrderController {
                         return p;
                     }).forEach(x -> {
                 Order order = new Order();
-                order.setOffice(office);
+                order.setAddress(address);
                 order.setOrderDate(new Date(new java.util.Date().getTime()));
                 order.setUser(user.get());
                 order.setProduct(x);

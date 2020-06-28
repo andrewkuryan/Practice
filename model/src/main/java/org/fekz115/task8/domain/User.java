@@ -19,6 +19,14 @@ public class User {
     @CollectionTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.EAGER, //TODO: make LAZY
+            cascade=CascadeType.PERSIST,
+            orphanRemoval=true
+    )
+    private Set<Order> orders= new HashSet<>();
+
     private String email;
     private String phoneNumber;
 
@@ -87,5 +95,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

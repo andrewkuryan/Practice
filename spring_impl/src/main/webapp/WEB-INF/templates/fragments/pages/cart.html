@@ -14,11 +14,8 @@
     </div>
 
     <form id="createOrderForm" method="post" th:action="@{/order/create}">
-        <!--/*@thymesVar id="offices" type="java.lang.Iterable<org.fekz115.task8.domain.Office>"*/-->
-        <label for="office" th:text="#{office}"></label>
-        <select name="officeId" id="office">
-            <option th:each="office : ${offices}" th:text="${office.getCity().getName()} + ' ' + ${office.getAddress()}" th:value="${office.getId()}"></option>
-        </select>
+        <label th:text="#{address}" for="address"></label>
+        <input type="text" name="address" id="address">
         <input id="submitButton" type="submit" th:value="#{accept}">
     </form>
 
