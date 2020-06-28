@@ -15,4 +15,10 @@ public interface UserRepository {
     Optional<User> findUserByLogin(String login);
 
     User save(User user);
+
+    Iterable<User> findAll();
+
+    void deleteById(Integer id);
+
+    Optional<User> findById(Integer id);
 }

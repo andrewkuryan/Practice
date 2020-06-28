@@ -7,7 +7,6 @@ import org.fekz115.task8.service.exception.ServiceException;
 import org.fekz115.task8.service.exception.userservice.LoginException;
 import org.fekz115.task8.service.exception.userservice.UserWithTheSameEmailExistsException;
 import org.fekz115.task8.service.exception.userservice.UserWithTheSameLoginExistsException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -48,5 +47,21 @@ public class UserService{
 
     public Optional<User> getUserByLogin(String login) {
         return repository.findUserByLogin(login);
+    }
+
+    public Iterable<User> getAllUsers() {
+        return repository.findAll();
+    }
+
+    public void remove(Integer id) {
+        repository.deleteById(id);
+    }
+
+    public Optional<User> getUserById(Integer id) {
+        return repository.findById(id);
+    }
+
+    public void save(User user) {
+        repository.save(user);
     }
 }
