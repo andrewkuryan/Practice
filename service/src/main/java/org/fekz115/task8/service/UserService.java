@@ -10,7 +10,10 @@ import org.fekz115.task8.service.exception.userservice.UserWithTheSameLoginExist
 
 import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class UserService{
 
@@ -20,6 +23,31 @@ public class UserService{
     public UserService(UserRepository repository, Function<String, String> encoder) {
         this.repository = repository;
         this.encoder = encoder;
+        init();
+    }
+
+    private void init() {
+        Iterable<User> users = repository.findAll();
+        StreamSupport.stream(users.spliterator(), false)
+            .filter(user -> user.getRoles().contains(Role.ADMIN))
+            .findAny()
+            .ifPresentOrElse((user) -> {}, () -> {
+                StreamSupport.stream(users.spliterator(), false)
+                        .filter(user -> user.getLogin().equals("admin"))
+                        .findFirst()
+                        .ifPresentOrElse(user -> {
+                            user.getRoles().add(Role.ADMIN);
+                            repository.save(user);
+                        }, () -> {
+                            User admin = new User();
+                            admin.setLogin("admin");
+                            admin.setPassword("admin");
+                            admin.setRoles(Set.of(Role.ADMIN, Role.USER));
+                            admin.setActive(true);
+                            encodeUserPassword(admin);
+                            repository.save(admin);
+                        });
+            });
     }
 
     public User login(User user) throws LoginException {
