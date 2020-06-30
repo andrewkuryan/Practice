@@ -1,8 +1,12 @@
-<title xmlns:th="http://www.thymeleaf.org"
-       th:fragment="title"
-       th:text="#{default_page}">
+<title xmlns:th="http://www.thymeleaf.org" th:fragment="title" th:text="#{default_page}">
 </title>
 
-<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
-    <h1 th:text="#{default_page}"></h1>
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content" th:class="default_pageBorderNone">
+    <div th:class="borderDeg"></div>
+    <div th:class="greenDivFood">
+        FOOD <br> DELIVERY
+    </div>
+    </div>
+    <img th:class="imgForSlideShow" th:name="slideShow">
+    <!--<h1 th:text="#{default_page}"></h1>-->
 </th:block>

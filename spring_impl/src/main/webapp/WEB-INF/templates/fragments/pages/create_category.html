@@ -1,15 +1,12 @@
-<title
-        xmlns:th="http://www.thymeleaf.org"
-        th:text="#{create_category}"
-        th:fragment="title"></title>
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        th:fragment="content">
+<title xmlns:th="http://www.thymeleaf.org" th:text="#{create_category}" th:fragment="title"></title>
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
     <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
-    <form method="post" th:object="${category}" th:action="@{/category}">
+    <form th:class="formAddorEddit" method="post" th:object="${category}" th:action="@{/category}">
+        <div th:class="textRegistration" th:text="#{edit}"></div>
+
         <input type="hidden" th:field="*{id}">
-        <label th:text="#{category_name}" for="name"></label>
-        <input type="text" id="name" th:field="*{name}">
-        <input type="submit" th:value="#{accept}">
+        <!-- <label th:text="#{category_name}" for="name"></label>-->
+        <input th:class="inputAuth" type="text" id="name" th:field="*{name}" th:placeholder="#{category_name}">
+        <input type="submit" th:value="#{accept}" th:class="ButtonAuth">
     </form>
 </th:block>

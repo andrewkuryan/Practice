@@ -1,30 +1,25 @@
-<title
-        xmlns:th="http://www.thymeleaf.org"
-        th:fragment="title"
-        th:text="#{signin}">
+<title xmlns:th="http://www.thymeleaf.org" th:fragment="title" th:text="#{signin}">
 </title>
 
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        th:fragment="content">
-    <div th:if="${param.error}">
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+    <!-- <div th:if="${param.error}" th:class="messageDivLogin">
         Invalid username and password.
     </div>
-    <div th:if="${param.logout}">
+    <div th:if="${param.logout}" th:class="messageDivLogin">
         You have been logged out.
-    </div>
-    <form th:action="@{/login}" method="post">
+    </div>-->
+    <form th:action="@{/login}" method="post" th:class="formRegistr">
+        <div th:class="textRegistration" th:text="#{signin}"></div>
         <div>
-            <label for="login" th:text="#{login}"></label>
-            <input type="text" name="username" id="login"/>
+            <!--<label for="login" th:text="#{login}" th:class="labelAuth"></label>-->
+            <input type="text" name="username" id="login" th:class="inputAuth" th:placeholder="#{login}" />
         </div>
         <div>
-            <label for="password" th:text="#{password}"></label>
-            <input type="password" name="password" id="password"/>
+            <!--<label for="password" th:text="#{password}" th:class="labelAuth"></label>-->
+            <input type="password" name="password" id="password" th:class="inputAuth" th:placeholder="#{password}" />
         </div>
         <div>
-            <input type="submit" th:value="#{signin}"/>
+            <input type="submit" th:value="#{signin}" th:class="ButtonAuth" />
         </div>
     </form>
-
 </th:block>

@@ -1,12 +1,7 @@
-<title xmlns:th="http://www.thymeleaf.org"
-        th:fragment="title"
-        th:text="#{cities}">
+<title xmlns:th="http://www.thymeleaf.org" th:fragment="title" th:text="#{cities}">
 </title>
 
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-        th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="content">
     <!--/*@thymesVar id="cities" type="java.lang.Iterable<org.fekz115.task8.domain.City>"*/-->
     <table>
         <tr>
@@ -19,12 +14,16 @@
         <tr th:each="city : ${cities}">
             <td th:text="${city.getName()}"></td>
             <th:block sec:authorize="hasAuthority('ADMIN')">
-                <td><a th:href="@{/city/edit/{id}(id=${city.getId()})}" th:text="#{edit}"></a></td>
-                <td><a th:href="@{/city/remove/{id}(id=${city.getId()})}" th:text="#{remove}"></a></td>
+                <td th:class="aTDremoveAddStyle">
+                    <a th:href="@{/city/edit/{id}(id=${city.getId()})}" th:text="#{edit}"></a>
+                </td>
+                <td th:class="aTDremoveAddStyle">
+                    <a th:class="aAddRemoveStyle" th:href="@{/city/remove/{id}(id=${city.getId()})}" th:text="#{remove}"></a>
+                </td>
             </th:block>
         </tr>
     </table>
-    <div sec:authorize="hasAuthority('ADMIN')">
+    <div sec:authorize="hasAuthority('ADMIN')" th:class="centertDivCreateCategory">
         <a th:href="@{/city/create}" th:text="#{create_city}"></a>
     </div>
 </th:block>

@@ -1,20 +1,26 @@
-<title
-        xmlns:th="http://www.thymeleaf.org"
-        th:text="${product.getName()}"
-        th:fragment="title">
+<title xmlns:th="http://www.thymeleaf.org" th:text="${product.getName()}" th:fragment="title">
     <!--/*@thymesVar id="product" type="org.fekz115.task8.domain.Product"*/-->
 </title>
 
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
     <!--/*@thymesVar id="product" type="org.fekz115.task8.domain.Product"*/-->
-    <h2 th:text="${product.getCategory().getName()}"></h2>
-    <h2 th:text="${product.getName()}"></h2>
-    <h3 th:text="${product.getCost()} + '$'"></h3>
-    <h3 th:text="${product.getDescription()}"></h3>
-    <div>
-        <img th:each="photo : ${product.getPhotos()}" th:src="@{/images/{path}(path=${photo.getPath()})}">
+
+    <h2 th:id="categoryNameh2" th:text="${product.getCategory().getName()}"></h2>
+    <h2 th:id="productNameh2" th:text="${product.getName()}"></h2>
+    <table id="categoryProduct">
+        <tr>
+            <td>
+                <h3 th:text="${product.getDescription()}"></h3>
+            </td>
+            <td>
+
+                <h3 th:text="${product.getCost()} + '$'"></h3>
+            </td>
+        </tr>
+    </table>
+    <div class="manyImageGalery">
+
+        <img th:class="sizeImage" th:each="photo : ${product.getPhotos()}" th:src="@{/images/{path}(path=${photo.getPath()})}">
     </div>
     <table>
         <thead>

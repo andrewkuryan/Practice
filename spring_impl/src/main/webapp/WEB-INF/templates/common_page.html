@@ -1,17 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <!--/*@thymesVar id="page" type="java.lang.String"*/-->
-    <head>
-        <th:block th:insert="fragments/commons/header_commons :: header_commons"></th:block>
-        <th:block th:insert="~{'fragments/pages/' + ${page} :: title}"></th:block>
-    </head>
+<!--/*@thymesVar id="page" type="java.lang.String"*/-->
 
-    <body>
-        <header th:insert="fragments/commons/nav_menu :: nav_menu"></header>
-        <section th:insert="fragments/commons/message :: message"></section>
-        <section th:class="content" th:insert="~{'fragments/pages/' + ${page} :: content}"></section>
-        <footer th:insert="fragments/commons/footer :: footer"></footer>
-    </body>
+<head>
+    <th:block th:insert="fragments/commons/header_commons :: header_commons"></th:block>
+    <th:block th:insert="~{'fragments/pages/' + ${page} :: title}"></th:block>
+
+</head>
+
+<body>
+
+    <header th:insert="fragments/commons/nav_menu :: nav_menu"></header>
+    <section th:insert="fragments/commons/message :: message"></section>
+    <section th:class="content" th:insert="~{'fragments/pages/' + ${page} :: content}"></section>
+    <footer th:insert="fragments/commons/footer :: footer"></footer>
+    <script>
+        var i = 0;
+        var time = 3000;
+        var images = [];
+        images[0] = "images/1.jpg";
+        images[1] = "images/2.jpg";
+        images[2] = "images/3.jpg";
+        images[3] = "images/4.jpg";
+        images[4] = "images/5.jpg";
+        images[5] = "images/6.jpg";
+        images[6] = "images/7.jpg";
+        images[7] = "images/8.jpg";
+        images[8] = "images/9.jpg";
+        images[9] = "images/10.jpg";
+        images[10] = "images/0.jpg";
+        images[11] = "images/11.jpg";
+
+        function slideShow() {
+
+            document.slideShow.src = images[i];
+            if (i < images.length - 1) i++;
+            else i = 0;
+            // document.getElementsByClassName("imgForSlideShow").style.opacity = "1";
+
+            setTimeout("slideShow()", time);
+        }
+        window.onload = slideShow;
+    </script>
+</body>
 
 </html>

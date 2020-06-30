@@ -1,8 +1,8 @@
-<div
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-        th:fragment="nav_menu">
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="nav_menu">
     <ul>
+        <li th:class="liWithImage">
+            <a th:href="@{/default_page}"><img th:src="@{images/lll.png}" th:class="logoClass"></a>
+        </li>
         <li>
             <a th:href="@{/category}" th:text="#{categories}"></a>
         </li>
@@ -19,12 +19,15 @@
             <li>
                 <a th:href="@{/specification}" th:text="#{specifications}"></a>
             </li>
-<!--            <li>-->
-<!--                <a th:href="@{/order}" th:text="#{orders}"></a>-->
-<!--            </li>-->
             <li>
                 <a th:href="@{/user}" th:text="#{users}"></a>
             </li>
+            <!--            <li>-->
+            <!--                <a th:href="@{/order}" th:text="#{orders}"></a>-->
+            <!--            </li>-->
+            <!--            <li>-->
+            <!--                <a th:href="@{/user}" th:text="#{users}"></a>-->
+            <!--            </li>-->
         </th:block>
         <th:block sec:authorize="hasAuthority('MANAGER')">
             <li>
@@ -35,22 +38,37 @@
             <li style="float:right">
                 <div class="authDiv">
                     <a th:href="@{/login}" th:text="#{signin}"></a>
+                </div>
+            </li>
+            <li style="float:right">
+                <div class="authDiv">
                     <a th:href="@{/registration}" th:text="#{registration}"></a>
                 </div>
             </li>
         </th:block>
         <th:block sec:authorize="isAuthenticated()">
-            <li style="float:right">
+
+            <li style="float:right" th:class="liSignOut">
+                <!--liSignOut-->
                 <div class="userInfo">
-                    <a class="cartA" th:text="#{cart}" th:href="@{/order/cart}"></a>
+                    <!--<a class="cartA" th:text="#{cart}" th:href="@{/order/cart}"></a>-->
                     <form class="logoutForm" th:action="@{/logout}" method="post">
-                        <input type="submit" th:value="#{sign_out}"/>
+                        <input type="submit" th:value="#{sign_out}" th:class="singOutInputButton" />
                     </form>
+                </div>
+            </li>
+            <li style="float:right" th:class="liCartA">
+                <div th:class="userInfo">
+                    <a th:class="cartA" th:text="#{cart}" th:href="@{/order/cart}"></a>
+                    <!--<form class="logoutForm" th:action="@{/logout}" method="post">
+                        <input type="submit" th:value="#{sign_out}" th:class="singOutInputButton" />
+                    </form>-->
                 </div>
             </li>
             <li style="float:right">
                 <div class="userName" sec:authentication="name"></div>
             </li>
+
         </th:block>
     </ul>
 </div>

@@ -1,36 +1,30 @@
-<title
-        xmlns:th="http://www.thymeleaf.org"
-        th:text="#{users}"
-        th:fragment="title">
+<title xmlns:th="http://www.thymeleaf.org" th:text="#{users}" th:fragment="title">
 </title>
 
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-        th:fragment="content">
-        <!--/*@thymesVar id="users" type="java.util.List<org.fekz115.task8.domain.User>"*/-->
-        <!--/*@thymesVar id="roles" type="java.util.List<org.fekz115.task8.domain.Role>"*/-->
-        <table th:if="${!users.isEmpty()}">
-            <tr>
-                <th th:text="#{login}"></th>
-                <th th:each="role : ${roles}" th:text="${role.name()}"></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.getLogin()}"></td>
-                <form th:action="@{/user/save/{id}(id=${user.getId()})}">
-                    <td th:each="role : ${roles}">
-                        <input type="checkbox" th:checked="${user.getRoles().contains(role)}" th:name="${role.name()}">
-                    </td>
-                    <td>
-                        <input type="submit" th:value="#{accept}">
-                    </td>
-                </form>
-                <td>
-                    <a th:href="@{/user/remove/{id}(id=${user.getId()})}" th:text="#{remove}"></a>
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="content">
+    <!--/*@thymesVar id="users" type="java.util.List<org.fekz115.task8.domain.User>"*/-->
+    <!--/*@thymesVar id="roles" type="java.util.List<org.fekz115.task8.domain.Role>"*/-->
+    <table th:if="${!users.isEmpty()}">
+        <tr>
+            <th th:text="#{login}"></th>
+            <th th:each="role : ${roles}" th:text="${role.name()}"></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getLogin()}"></td>
+            <form th:action="@{/user/save/{id}(id=${user.getId()})}">
+                <td th:class="checkbox" th:each="role : ${roles}">
+                    <input th:class="checkBoxxx" type="checkbox" th:checked="${user.getRoles().contains(role)}" th:name="${role.name()}">
                 </td>
-            </tr>
-        </table>
+                <td th:class="tdAddToCart">
+                    <input th:class="buttonAccept" type="submit" th:value="#{accept}">
+                </td>
+            </form>
+            <td th:class="aTDremoveAddStyle">
+                <a th:class="aAddRemoveStyle" th:href="@{/user/remove/{id}(id=${user.getId()})}" th:text="#{remove}"></a>
+            </td>
+        </tr>
+    </table>
     </div>
 </th:block>

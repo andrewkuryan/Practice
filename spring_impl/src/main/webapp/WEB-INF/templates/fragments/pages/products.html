@@ -1,33 +1,22 @@
-<title
-        xmlns:th="http://www.thymeleaf.org"
-        th:text="${category.getName()}"
-        th:fragment="title">
+<title xmlns:th="http://www.thymeleaf.org" th:text="${category.getName()}" th:fragment="title">
     <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
 </title>
-
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-        th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="content">
     <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
-
     <th:block th:with="products = ${category.getProducts()}" th:insert="fragments/pages/products :: productList">
 
     </th:block>
 
-    <div sec:authorize="hasAuthority('ADMIN')">
+    <div th:class="centertDivCreateCategory" sec:authorize="hasAuthority('ADMIN')">
         <a th:href="@{/product/create/{categoryId}(categoryId=${category.getId()})}">Create Product</a>
     </div>
 
 </th:block>
 
-<div
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-    th:fragment="productList">
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="productList">
     <!--/*@thymesVar id="products" type="java.lang.Iterable<org.fekz115.task8.domain.Product>"*/-->
     <!--/*@thymesVar id="catalog" type="java.lang.Boolean"*/-->
-    <table>
+    <table th:class="tableOfProducts">
         <tr>
             <th th:text="#{product_name}"></th>
             <th th:text="#{cost}"></th>
@@ -40,16 +29,23 @@
             </th:block>
         </tr>
         <tr th:each="product : ${products}">
-            <td><a th:href="@{/product/{productId}(productId=${product.getId()})}" th:text="${product.getName()}"></a></td>
+            <td>
+                <a th:href="@{/product/{productId}(productId=${product.getId()})}" th:text="${product.getName()}"></a>
+            </td>
             <td th:text="${product.getCost()} + '$'"></td>
             <th:block sec:authorize="hasAuthority('ADMIN')">
-                <td><a th:href="@{/product/edit/{id}(id=${product.getId()})}" th:text="#{edit}"></a></td>
-                <td><a th:href="@{/product/remove/{id}(id=${product.getId()})}" th:text="#{remove}"></a></td>
+                <td th:class="aTDremoveAddStyle">
+                    <a th:class="aAddRemoveStyle" th:href="@{/product/edit/{id}(id=${product.getId()})}" th:text="#{edit}"></a>
+                </td>
+                <td th:class="aTDremoveAddStyle">
+                    <a th:class="aAddRemoveStyle" th:href="@{/product/remove/{id}(id=${product.getId()})}" th:text="#{remove}"></a>
+                </td>
             </th:block>
             <th:block th:if="${catalog != null}" sec:authorize="hasAuthority('USER')">
-                <td><input type="button" th:value="#{add_to_cart}" th:data1="${product.getId()}" th:data2="${product.getName()}" th:data3="${product.getCost()}" onclick="addToCart(this.getAttribute('data1'), this.getAttribute('data2'), this.getAttribute('data3'));"></td>
+                <td th:class="tdAddToCart">
+                    <input th:class="buttonAddToCart" th:size="1" type="button" th:value="#{add_to_cart}" th:data1="${product.getId()}" th:data2="${product.getName()}" th:data3="${product.getCost()}" onclick="addToCart(this.getAttribute('data1'), this.getAttribute('data2'), this.getAttribute('data3'));">
+                </td>
             </th:block>
         </tr>
     </table>
-
 </div>

@@ -27,6 +27,7 @@
     <project.thymeleaf-extras.version>3.0.4.RELEASE</project.thymeleaf-extras.version>
     <project.servlet-api.version>4.0.1</project.servlet-api.version>
     <project.maria-jdbc.version>2.5.3</project.maria-jdbc.version>
+    <project.mysql-connector.version>8.0.20</project.mysql-connector.version>
     <project.hibernate.version>5.4.10.Final</project.hibernate.version>
     <project.fileupload.version>1.4</project.fileupload.version>
   </properties>
@@ -76,10 +77,15 @@
       <artifactId>thymeleaf-extras-springsecurity5</artifactId>
       <version>${project.thymeleaf-extras.version}</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>org.mariadb.jdbc</groupId>
       <artifactId>mariadb-java-client</artifactId>
       <version>${project.maria-jdbc.version}</version>
+    </dependency> -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${project.mysql-connector.version}</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>

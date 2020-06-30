@@ -1,6 +1,12 @@
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="message">
+<div xmlns:th="http://www.thymeleaf.org" th:class="messageDiv" th:fragment="message">
     <!--/*@thymesVar id="message" type="java.lang.String"*/-->
     <!--/*@thymesVar id="exception" type="org.fekz115.task8.service.exception.ServiceException"*/-->
     <div th:if="${exception != null}" th:text="#{${exception.getMessage()}}"></div>
     <div th:if="${message != null}" th:text="${message}"></div>
+    <div th:if="${param.error}" th:class="messageDiv">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}" th:class="messageDiv">
+        You have been logged out.
+    </div>
 </div>

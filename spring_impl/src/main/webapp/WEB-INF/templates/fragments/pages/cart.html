@@ -1,28 +1,29 @@
-<title
-        xmlns:th="http://www.thymeleaf.org"
-        th:text="#{cart}"
-        th:fragment="title">
+<title xmlns:th="http://www.thymeleaf.org" th:text="#{cart}" th:fragment="title">
 </title>
 
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
 
     <div>
-        <table id="productList"></table>
-        <div id="cost"></div>
+        <table id="productList">
+        </table>
+        <div id="cost" th:class="costCart"></div>
     </div>
 
+
+
+
     <form id="createOrderForm" method="post" th:action="@{/order/create}">
-        <label th:text="#{address}" for="address"></label>
-        <input type="text" name="address" id="address">
-        <input id="submitButton" type="submit" th:value="#{accept}">
+        <div th:class="selectCart" style="display:flex">
+            <label th:id="labelCart" th:text="#{address}" for="address"></label>
+            <input th:class="inputAuth" type="text" name="address" id="address"></div>
+
+        <input th:class="centeracceptbutton" type="submit" th:value="#{accept}">
     </form>
 
 
     <script>
-
         function renderProductList() {
+
             let table = document.getElementById("productList");
             let costDiv = document.getElementById("cost");
             let cost = 0;
@@ -40,7 +41,7 @@
             costDiv.innerText = `${cost}$`;
         }
 
-        if(getProductList() == null || getProductList().length < 1) {
+        if (getProductList() == null || getProductList().length < 1) {
             document.getElementById("submitButton").disabled = "disabled";
         } else {
             let form = document.getElementById("createOrderForm");

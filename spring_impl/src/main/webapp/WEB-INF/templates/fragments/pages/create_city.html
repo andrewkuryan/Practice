@@ -1,17 +1,14 @@
-<title
-        xmlns:th="http://www.thymeleaf.org"
-        th:text="#{create_city}"
-        th:fragment="title">
+<title xmlns:th="http://www.thymeleaf.org" th:text="#{create_city}" th:fragment="title">
 </title>
 
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
     <!--/*@thymesVar id="city" type="org.fekz115.task8.domain.City"*/-->
-    <form method="post" th:object="${city}" th:action="@{/city}">
+    <form method="post" th:object="${city}" th:action="@{/city}" th:class="formAddorEddit">
         <input type="hidden" th:field="*{id}">
-        <label th:text="#{city_name}" for="name"></label>
-        <input type="text" id="name" th:field="*{name}">
-        <input type="submit" th:value="#{accept}">
+        <div th:class="textRegistration" th:text="#{create_city}"></div>
+
+        <!-- <label th:text="#{city_name}" for="name"></label>-->
+        <input th:class="inputAuth" type="text" id="name" th:field="*{name}" th:placeholder="#{city_name}">
+        <input type="submit" th:value="#{accept}" th:class="ButtonAuth">
     </form>
 </th:block>

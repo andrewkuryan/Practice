@@ -1,31 +1,22 @@
-<title xmlns:th="http://www.thymeleaf.org"
-       th:fragment="title"
-       th:text="#{products}">
+<title xmlns:th="http://www.thymeleaf.org" th:fragment="title" th:text="#{products}">
 </title>
 
-<th:block
-        xmlns:th="http://www.thymeleaf.org"
-        th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
     <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
-    <p th:text="#{create_new} + ' ' + ${category.getName()}"></p>
     <!--/*@thymesVar id="product" type="org.fekz115.task8.domain.Product"*/-->
-    <form th:object="${product}" method="post" th:action="@{/product/create}" enctype="multipart/form-data">
+    <form th:class="formAddorEddit" th:object="${product}" method="post" th:action="@{/product/create}" enctype="multipart/form-data">
 
         <input type="hidden" th:field="*{id}">
-
+        <div th:class="textRegistration" th:text="#{edit} + ' ' + ${category.getName()}"></div>
         <input type="hidden" name="categoryId" th:value="${category.getId()}">
 
-        <label th:text="#{product_name}" for="name"></label>
-        <input type="text" id="name" th:field="*{name}">
+        <input th:class="inputAuth" type="text" id="name" th:field="*{name}" th:placeholder="#{product_name}">
 
-        <label th:text="#{photos}" for="photos"></label>
         <input type="file" name="images" id="photos" accept="image/*" multiple>
 
-        <label th:text="#{description}" for="description"></label>
-        <input type="text" id="description" th:field="*{description}">
+        <input th:class="inputAuth" type="text" id="description" th:field="*{description}" th:placeholder="#{description}">
 
-        <label for="cost" th:text="#{cost}"></label>
-        <input type="number" th:field="*{cost}" id="cost">
+        <input th:class="inputAuth" type="number" th:field="*{cost}" id="cost" th:placeholder="#{cost}">
 
         <div th:each="specification : ${category.getSpecifications()}">
             <label th:text="${specification.getName()}" th:for="${specification.getId()}"></label>
@@ -33,6 +24,6 @@
             <span th:text="${specification.getUnits()}"></span>
         </div>
 
-        <input type="submit" th:value="#{accept}">
+        <input type="submit" th:value="#{accept}" th:class="ButtonAuth">
     </form>
 </th:block>
