@@ -1,0 +1,10 @@
+{
+  "name": "practice",
+  "version": "0.0.0",
+  "dependencies": {
+    "glob": "^7.1.6",
+    "lodash": "^4.17.15",
+    "ncp": "^2.0.0",
+    "stylus": "^0.54.7"
+  }
+}

@@ -127,18 +127,6 @@ hs_err_pid*
 ## ignoring target file
 target/
 
-### Maven ###
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-# https://github.com/takari/maven-wrapper#usage-without-binary-jar
-.mvn/wrapper/maven-wrapper.jar
-
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -153,11 +141,18 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/java,java-web,maven,intellij,visualstudiocode
 
-pom.xml
-<<<<<<< HEAD
 spring_impl/src/main/resources/application.properties
 .idea/
 **/*.iml
-=======
-spring_impl/src/main/resources/application.properties
->>>>>>> master
+
+## npm ##
+node_modules
+package-lock.json
+
+## Gradle ##
+gradle
+.gradle
+build
+
+gradlew
+gradlew.bat
