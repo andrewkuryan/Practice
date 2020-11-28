@@ -7,103 +7,154 @@ import java.util.Set;
 @Entity
 public class Product {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-    private String name;
-    private int cost;
-    private String description;
+	private String name;
+	private String description;
 
-    @ManyToOne
-    @JoinColumn(name="categoryId")
-    private Category category;
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	private Category category;
 
-    @OneToMany(
-            mappedBy = "product",
-            fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade=CascadeType.PERSIST,
-            orphanRemoval=true
-    )
-    private Set<Order> orders= new HashSet<>();
+	@OneToMany(
+			mappedBy = "cart",
+			fetch = FetchType.EAGER, //TODO: make LAZY
+			cascade = CascadeType.PERSIST,
+			orphanRemoval = true
+	)
+	private Set<CartProduct> cartProducts = new HashSet<>();
 
-    @OneToMany(
-            mappedBy = "product",
-            fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade = CascadeType.PERSIST,
-            orphanRemoval = true
-    )
-    private Set<ProductSpecification> specifications= new HashSet<>();
+	@OneToMany(
+			mappedBy = "product",
+			fetch = FetchType.EAGER, //TODO: make LAZY
+			cascade = CascadeType.PERSIST,
+			orphanRemoval = true
+	)
+	private Set<ProductSpecification> specifications = new HashSet<>();
 
-    @OneToMany(
-            mappedBy = "product",
-            fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade = CascadeType.PERSIST,
-            orphanRemoval = true
-    )
-    private Set<Photo> photos= new HashSet<>();
+	@OneToMany(
+			mappedBy = "product",
+			fetch = FetchType.EAGER, //TODO: make LAZY
+			cascade = CascadeType.PERSIST,
+			orphanRemoval = true
+	)
+	private Set<ProductEnumerableSpecification> enumerableSpecifications = new HashSet<>();
 
-    public int getId() {
-        return id;
-    }
+	@OneToMany(
+			mappedBy = "product",
+			fetch = FetchType.EAGER, //TODO: make LAZY
+			cascade = CascadeType.PERSIST,
+			orphanRemoval = true
+	)
+	private Set<Photo> photos = new HashSet<>();
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	@ManyToOne
+	@JoinColumn(name = "producerId")
+	private Producer producer;
 
-    public String getName() {
-        return name;
-    }
+	@OneToMany(
+			mappedBy = "product",
+			fetch = FetchType.EAGER, //TODO: make LAZY
+			cascade = CascadeType.PERSIST,
+			orphanRemoval = true
+	)
+	private Set<ProductTag> productTags = new HashSet<>();
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	@OneToMany(
+			mappedBy = "store",
+			fetch = FetchType.EAGER, //TODO: make LAZY
+			cascade = CascadeType.PERSIST,
+			orphanRemoval = true
+	)
+	private Set<ProductStore> productStores = new HashSet<>();
 
-    public int getCost() {
-        return cost;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Category getCategory() {
-        return category;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Set<Order> getOrders() {
-        return orders;
-    }
+	public Category getCategory() {
+		return category;
+	}
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
-    public Set<ProductSpecification> getSpecifications() {
-        return specifications;
-    }
+	public Set<CartProduct> getCartProducts() {
+		return cartProducts;
+	}
 
-    public void setSpecifications(Set<ProductSpecification> specifications) {
-        this.specifications = specifications;
-    }
+	public void setCartProducts(Set<CartProduct> cartProducts) {
+		this.cartProducts = cartProducts;
+	}
 
-    public Set<Photo> getPhotos() {
-        return photos;
-    }
+	public Set<ProductSpecification> getSpecifications() {
+		return specifications;
+	}
 
-    public void setPhotos(Set<Photo> photos) {
-        this.photos = photos;
-    }
+	public void setSpecifications(Set<ProductSpecification> specifications) {
+		this.specifications = specifications;
+	}
+
+	public Set<ProductEnumerableSpecification> getEnumerableSpecifications() {
+		return enumerableSpecifications;
+	}
+
+	public void setEnumerableSpecifications(Set<ProductEnumerableSpecification> enumerableSpecifications) {
+		this.enumerableSpecifications = enumerableSpecifications;
+	}
+
+	public Set<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(Set<Photo> photos) {
+		this.photos = photos;
+	}
+
+	public Producer getProducer() {
+		return producer;
+	}
+
+	public void setProducer(Producer producer) {
+		this.producer = producer;
+	}
+
+	public Set<ProductTag> getProductTags() {
+		return productTags;
+	}
+
+	public void setProductTags(Set<ProductTag> productTags) {
+		this.productTags = productTags;
+	}
+
+	public Set<ProductStore> getProductStores() {
+		return productStores;
+	}
+
+	public void setProductStores(Set<ProductStore> productStores) {
+		this.productStores = productStores;
+	}
 }

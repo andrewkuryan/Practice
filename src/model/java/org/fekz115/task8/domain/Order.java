@@ -7,66 +7,76 @@ import java.sql.Date;
 @Table(name = "OrderTable")
 public class Order {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-    private boolean isReceived;
-    private Date orderDate;
-    private String address;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "productId")
-    private Product product;
+	@OneToOne
+	@JoinColumn(name = "cartId")
+	private Cart cart;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
+	private Date createdAt;
+	private String status;
+	private String deliveryAddress;
+	private Double totalPrice;
 
-    public int getId() {
-        return id;
-    }
+	@ManyToOne
+	@JoinColumn(name = "cityDeliveryAreaId")
+	private CityDeliveryArea cityDeliveryArea;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public boolean isReceived() {
-        return isReceived;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setReceived(boolean received) {
-        isReceived = received;
-    }
+	public Cart getCart() {
+		return cart;
+	}
 
-    public Date getOrderDate() {
-        return orderDate;
-    }
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public Product getProduct() {
-        return product;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public CityDeliveryArea getCityDeliveryArea() {
+		return cityDeliveryArea;
+	}
+
+	public void setCityDeliveryArea(CityDeliveryArea cityDeliveryArea) {
+		this.cityDeliveryArea = cityDeliveryArea;
+	}
 }

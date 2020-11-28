@@ -4,26 +4,22 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class Category {
+public class Producer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String name;
+	private String businessAddress;
 
 	@OneToMany(
-			mappedBy = "category",
+			mappedBy = "producer",
 			fetch = FetchType.EAGER, //TODO: make LAZY
 			cascade = CascadeType.PERSIST,
 			orphanRemoval = true
 	)
 	private Set<Product> products = new HashSet<>();
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
 
 	public int getId() {
 		return id;
@@ -41,8 +37,19 @@ public class Category {
 		this.name = name;
 	}
 
+	public String getBusinessAddress() {
+		return businessAddress;
+	}
+
+	public void setBusinessAddress(String businessAddress) {
+		this.businessAddress = businessAddress;
+	}
+
 	public Set<Product> getProducts() {
 		return products;
 	}
 
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 }

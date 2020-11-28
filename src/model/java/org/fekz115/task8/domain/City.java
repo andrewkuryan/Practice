@@ -7,41 +7,87 @@ import java.util.Set;
 @Entity
 public class City {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-    private String name;
+	private String name;
+	private boolean isDeliveryAvailable;
+	private boolean isStoreAvailable;
 
-    @OneToMany(
-            mappedBy = "city",
-            fetch = FetchType.EAGER, //TODO: make LAZY
-            cascade=CascadeType.PERSIST,
-            orphanRemoval=true
-    )
-    private Set<Office> offices = new HashSet<>();
+	@OneToMany(
+			mappedBy = "city",
+			fetch = FetchType.EAGER, //TODO: make LAZY
+			cascade = CascadeType.PERSIST,
+			orphanRemoval = true
+	)
+	private Set<Store> stores = new HashSet<>();
 
-    public int getId() {
-        return id;
-    }
+	@OneToOne
+	@JoinColumn(name = "coordsId")
+	private Coords coords;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	@OneToMany(
+			mappedBy = "DeliveryArea",
+			fetch = FetchType.EAGER, //TODO: make LAZY
+			cascade = CascadeType.PERSIST,
+			orphanRemoval = true
+	)
+	private Set<CityDeliveryArea> cityDeliveryAreas = new HashSet<>();
 
-    public String getName() {
-        return name;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public Set<Office> getOffices() {
-        return offices;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setOffices(Set<Office> offices) {
-        this.offices = offices;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isDeliveryAvailable() {
+		return isDeliveryAvailable;
+	}
+
+	public void setDeliveryAvailable(boolean deliveryAvailable) {
+		isDeliveryAvailable = deliveryAvailable;
+	}
+
+	public boolean isStoreAvailable() {
+		return isStoreAvailable;
+	}
+
+	public void setStoreAvailable(boolean storeAvailable) {
+		isStoreAvailable = storeAvailable;
+	}
+
+	public Set<Store> getStores() {
+		return stores;
+	}
+
+	public void setStores(Set<Store> stores) {
+		this.stores = stores;
+	}
+
+	public Coords getCoords() {
+		return coords;
+	}
+
+	public void setCoords(Coords coords) {
+		this.coords = coords;
+	}
+
+	public Set<CityDeliveryArea> getCityDeliveryAreas() {
+		return cityDeliveryAreas;
+	}
+
+	public void setCityDeliveryAreas(Set<CityDeliveryArea> cityDeliveryAreas) {
+		this.cityDeliveryAreas = cityDeliveryAreas;
+	}
 }

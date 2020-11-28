@@ -28,7 +28,6 @@ public class User {
 	private Set<Order> orders = new HashSet<>();
 
 	private String email;
-	private String phoneNumber;
 
 	private String activationCode;
 	private boolean isActive;
@@ -63,14 +62,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
 	}
 
 	public String getActivationCode() {
