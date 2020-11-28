@@ -1,10 +1,8 @@
 package org.fekz115.task8.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
+@Entity
 public class Coords {
 
 	@Id
@@ -14,10 +12,10 @@ public class Coords {
 	private double latitude;
 	private double longitude;
 
-	@OneToOne(mappedBy = "store")
+	@OneToOne(mappedBy = "coords")
 	private Store store;
 
-	@OneToOne(mappedBy = "city")
+	@OneToOne(mappedBy = "coords")
 	private City city;
 
 	public int getId() {

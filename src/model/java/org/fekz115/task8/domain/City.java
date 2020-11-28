@@ -28,7 +28,7 @@ public class City {
 	private Coords coords;
 
 	@OneToMany(
-			mappedBy = "DeliveryArea",
+			mappedBy = "deliveryArea",
 			fetch = FetchType.EAGER, //TODO: make LAZY
 			cascade = CascadeType.PERSIST,
 			orphanRemoval = true

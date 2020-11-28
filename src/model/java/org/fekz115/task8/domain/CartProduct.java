@@ -1,11 +1,9 @@
 package org.fekz115.task8.domain;
 
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
 public class CartProduct {
 
 	@Embeddable

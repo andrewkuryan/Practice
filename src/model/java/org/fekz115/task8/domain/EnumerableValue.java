@@ -1,9 +1,8 @@
 package org.fekz115.task8.domain;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
+@Entity
 public class EnumerableValue {
 
 	@Id
@@ -15,14 +14,6 @@ public class EnumerableValue {
 	@ManyToOne
 	@JoinColumn(name = "enumerableSpecificationId")
 	private EnumerableSpecification enumerableSpecification;
-
-	@OneToMany(
-			mappedBy = "ProductEnumerableSpecification",
-			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
-			orphanRemoval = true
-	)
-	private Set<ProductEnumerableSpecification> productEnumerableSpecifications = new HashSet<>();
 
 	public int getId() {
 		return id;
@@ -46,13 +37,5 @@ public class EnumerableValue {
 
 	public void setEnumerableSpecification(EnumerableSpecification enumerableSpecification) {
 		this.enumerableSpecification = enumerableSpecification;
-	}
-
-	public Set<ProductEnumerableSpecification> getProductEnumerableSpecifications() {
-		return productEnumerableSpecifications;
-	}
-
-	public void setProductEnumerableSpecifications(Set<ProductEnumerableSpecification> productEnumerableSpecifications) {
-		this.productEnumerableSpecifications = productEnumerableSpecifications;
 	}
 }

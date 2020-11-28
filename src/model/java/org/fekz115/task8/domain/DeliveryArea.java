@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class DeliveryArea {
 
 	@Id
@@ -19,7 +20,7 @@ public class DeliveryArea {
 	private Store store;
 
 	@OneToMany(
-			mappedBy = "DeliveryArea",
+			mappedBy = "city",
 			fetch = FetchType.EAGER, //TODO: make LAZY
 			cascade = CascadeType.PERSIST,
 			orphanRemoval = true

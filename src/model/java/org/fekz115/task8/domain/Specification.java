@@ -15,10 +15,6 @@ public class Specification {
 	private String units;
 	private String description;
 
-	@ManyToOne
-	@JoinColumn(name = "categoryId")
-	private Category category;
-
 	@OneToMany(
 			mappedBy = "product",
 			fetch = FetchType.EAGER, //TODO: make LAZY
@@ -65,13 +61,5 @@ public class Specification {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 }

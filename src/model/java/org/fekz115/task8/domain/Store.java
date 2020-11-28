@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Store {
 
 	@Id
@@ -21,7 +22,7 @@ public class Store {
 	@JoinColumn(name = "coordsId")
 	private Coords coords;
 
-	@OneToOne(mappedBy = "DeliveryArea")
+	@OneToOne(mappedBy = "store")
 	private DeliveryArea deliveryArea;
 
 	@OneToMany(

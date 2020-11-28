@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class CityDeliveryArea {
 
 	@Id
@@ -19,7 +20,7 @@ public class CityDeliveryArea {
 	private City city;
 
 	@OneToMany(
-			mappedBy = "OrderTable",
+			mappedBy = "cityDeliveryArea",
 			fetch = FetchType.EAGER, //TODO: make LAZY
 			cascade = CascadeType.PERSIST,
 			orphanRemoval = true

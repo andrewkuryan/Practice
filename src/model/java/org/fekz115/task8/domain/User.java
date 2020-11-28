@@ -25,7 +25,7 @@ public class User {
 			cascade = CascadeType.PERSIST,
 			orphanRemoval = true
 	)
-	private Set<Order> orders = new HashSet<>();
+	private Set<Cart> carts = new HashSet<>();
 
 	private String email;
 
@@ -88,12 +88,12 @@ public class User {
 		this.roles = roles;
 	}
 
-	public Set<Order> getOrders() {
-		return orders;
+	public Set<Cart> getCarts() {
+		return carts;
 	}
 
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
+	public void setCarts(Set<Cart> carts) {
+		this.carts = carts;
 	}
 
 	@Override

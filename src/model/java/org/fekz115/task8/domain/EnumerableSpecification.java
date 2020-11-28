@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class EnumerableSpecification {
 
 	@Id
@@ -14,7 +15,7 @@ public class EnumerableSpecification {
 	private String name;
 
 	@OneToMany(
-			mappedBy = "EnumerableSpecification",
+			mappedBy = "enumerableSpecification",
 			fetch = FetchType.EAGER, //TODO: make LAZY
 			cascade = CascadeType.PERSIST,
 			orphanRemoval = true

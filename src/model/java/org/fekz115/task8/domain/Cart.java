@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Cart {
 
 	@Id
@@ -17,14 +18,14 @@ public class Cart {
 	private boolean isOrdered;
 
 	@OneToMany(
-			mappedBy = "OrderTable",
+			mappedBy = "cart",
 			fetch = FetchType.EAGER, //TODO: make LAZY
 			cascade = CascadeType.PERSIST,
 			orphanRemoval = true
 	)
 	private Set<CartProduct> cartProducts = new HashSet<>();
 
-	@OneToOne(mappedBy = "OrderTable")
+	@OneToOne(mappedBy = "cart")
 	private Order order;
 
 	public int getId() {

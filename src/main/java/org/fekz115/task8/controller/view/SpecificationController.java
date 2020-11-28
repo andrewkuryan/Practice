@@ -48,7 +48,6 @@ public class SpecificationController {
     @PostMapping
     public String createSpecification(Specification specification, @RequestParam int categoryId, Model model) {
         Optional<Category> category = categoryService.getCategoryById(categoryId);
-        category.ifPresent(specification::setCategory);
         try {
             specificationService.save(specification);
             model.addAttribute("message", "Specification " + specification.getName() + " successfully created for category " + category.get().getName());
