@@ -1,0 +1,24 @@
+.specificationsBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.specificationsBlock .specificationItem {
+    width: 92%;
+    font-size: 22px;
+    color: #4e011b;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.specificationsBlock .specificationItem p:first-child {
+    font-weight: bold;
+}
+
+.specificationsBlock .specificationItem p:last-child {
+    font-style: italic;
+}

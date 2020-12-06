@@ -28,7 +28,7 @@ public class Store {
 	@OneToMany(
 			mappedBy = "store",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<ProductStore> productStores = new HashSet<>();

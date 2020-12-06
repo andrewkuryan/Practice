@@ -2,28 +2,189 @@
 </title>
 
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+    <link rel="stylesheet" th:href="@{/styles/createProduct.css}">
     <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
     <!--/*@thymesVar id="product" type="org.fekz115.task8.domain.Product"*/-->
-    <form th:class="formAddorEddit" th:object="${product}" method="post" th:action="@{/product/create}" enctype="multipart/form-data">
+    <form class="productRoot formAddorEddit" th:object="${product}" method="post" th:action="@{/product/create}"
+          enctype="multipart/form-data">
+        <div id="specificationsInfo" style="display: none" th:text="${specificationsInfo}"></div>
 
-        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{id}"/>
         <div th:class="textRegistration" th:text="#{edit} + ' ' + ${category.getName()}"></div>
-        <input type="hidden" name="categoryId" th:value="${category.getId()}">
+        <input type="hidden" name="categoryId" th:value="${category.getId()}"/>
 
-        <input th:class="inputAuth" type="text" id="name" th:field="*{name}" th:placeholder="#{product_name}">
-
-        <input type="file" name="images" id="photos" accept="image/*" multiple>
-
-        <input th:class="inputAuth" type="text" id="description" th:field="*{description}" th:placeholder="#{description}">
-
-        <input th:class="inputAuth" type="number" th:field="*{cost}" id="cost" th:placeholder="#{cost}">
-
-        <div th:each="specification : ${category.getSpecifications()}">
-            <label th:text="${specification.getName()}" th:for="${specification.getId()}"></label>
-            <input type="text" th:name="${specification.getId()}" th:value="${T(org.fekz115.task8.util.Utils).getSpecificationValue(product, specification)}">
-            <span th:text="${specification.getUnits()}"></span>
+        <div class="input-field">
+            <input th:class="inputAuth" type="text" id="name" th:field="*{name}"
+                   th:placeholder="#{product_name}"/>
+            <label for="name">Name</label>
         </div>
 
-        <input type="submit" th:value="#{accept}" th:class="ButtonAuth">
+        <div class="file-field input-field">
+            <div class="waves-effect waves-teal btn-flat fileButton">
+                <span>Photo</span>
+                <input type="file" name="images" id="photos" accept="image/*" multiple>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload one or more files">
+            </div>
+        </div>
+
+        <div class="input-field">
+            <input th:class="inputAuth" type="text" id="description" th:field="*{description}"
+                   th:placeholder="#{description}"/>
+            <label for="description">Description</label>
+        </div>
+
+        <div class="input-field">
+            <input th:class="inputAuth" type="number" step="0.01" id="price" th:field="*{price}"
+                   th:placeholder="#{price}"/>
+            <label for="price">Price</label>
+        </div>
+
+        <p class="formParagraph">Specifications</p>
+
+        <div id="specifications">
+            <div
+                    th:id="${'specificationRow-' + rowStat.index}"
+                    class="input-field specificationRow existedSpecification"
+                    th:each="specification, rowStat : ${product.getSpecifications()}"
+            >
+                <select
+                        th:id="${'select-' + rowStat.index}"
+                        th:name="${'specification-' + rowStat.index}"
+                >
+                    <option
+                            th:value="${'specification-' + specification.getSpecification().getId()}"
+                            th:text="${specification.getSpecification().getName()}"
+                            selected
+                    ></option>
+                </select>
+                <div class="valueBlock" th:id="${'valueBlock-' + rowStat.index}">
+                    <input
+                            type="text"
+                            th:id="${'unitInput-' + rowStat.index}"
+                            th:name="${'specificationValue-' + rowStat.index}"
+                            th:value="${specification.getValue()}"
+                    />
+                    <span
+                            th:id="${'unitLabel-' + rowStat.index}"
+                            class="unitInput"
+                            th:text="${specification.getSpecification().getUnits()}"
+                    ></span>
+                </div>
+                <div class="removeButton waves-effect waves-teal btn-flat"
+                     th:onclick="|removeInput(${rowStat.index})|"
+                >
+                    <i class="material-icons">close</i>
+                </div>
+            </div>
+            <div
+                    th:id="${'specificationRow-' + (rowStat.index + product.getSpecifications().size())}"
+                    class="input-field specificationRow existedSpecification"
+                    th:each="specification, rowStat : ${product.getEnumerableSpecifications()}"
+            >
+                <select
+                        th:id="${'select-' + (rowStat.index + product.getSpecifications().size())}"
+                        th:name="${'specification-' + (rowStat.index + product.getSpecifications().size())}"
+                >
+                    <option
+                            th:value="${'enumerable-' + specification.getEnumerableSpecification().getId()}"
+                            th:text="${specification.getEnumerableSpecification().getName()}"
+                            selected
+                    ></option>
+                </select>
+                <div class="valueBlock" th:id="${'valueBlock-' + (rowStat.index + product.getSpecifications().size())}">
+                    <select
+                            th:id="${'enumerableInput-' + (rowStat.index + product.getSpecifications().size())}"
+                            th:name="${'enumerableValue-' + (rowStat.index + product.getSpecifications().size())}"
+                    >
+                        <option
+                                th:value="${specification.getEnumerableValue().getId()}"
+                                th:text="${specification.getEnumerableValue().getValue()}"
+                                selected
+                        ></option>
+                    </select>
+                </div>
+                <div class="removeButton waves-effect waves-teal btn-flat"
+                     th:onclick="|removeInput(${(rowStat.index + product.getSpecifications().size())})|"
+                >
+                    <i class="material-icons">close</i>
+                </div>
+            </div>
+        </div>
+        <div class="waves-effect waves-teal btn-flat addButton" onclick="addInput()">
+            <i class="material-icons">add</i>
+            Add specification
+        </div>
+
+        <button type="submit" th:text="#{accept}" class="btn waves-effect waves-teal ButtonAuth"></button>
     </form>
+
+    <script type="text/javascript">
+        const specificationInfo = JSON.parse(document.getElementById("specificationsInfo").innerText);
+
+        let currentIndex = document.getElementById("specifications").children.length;
+
+        function onChangeSelect(index) {
+            const select = document.getElementById(`select-${index}`);
+            const valueBlock = document.getElementById(`valueBlock-${index}`);
+            const [type, id] = select.value.split("-");
+            const specification = specificationInfo.find(info => info.id == id);
+            if (type === 'specification') {
+                valueBlock.innerHTML = `
+                   <input type="text" name="specificationValue-${index}"/>
+                   <span id="${'unitLabel-' + index}" class="unitInput">${specification.unit}</span>
+                `;
+            } else if (type === 'enumerable') {
+                valueBlock.innerHTML = `
+                    <select id="enumerableInput-${index}" name="enumerableValue-${index}">
+                        ${specification.values.map(v => `
+                            <option value="${v.id}">${v.value}</option>
+                        `)}}
+                    </select>
+                `;
+
+                M.FormSelect.init(document.getElementById(`enumerableInput-${index}`));
+            }
+        }
+
+        function addInput() {
+            const container = document.getElementById("specifications");
+            const newDiv = document.createElement("div");
+
+            newDiv.innerHTML = `
+                <select
+                        id="select-${currentIndex}"
+                        name="newSpecification-${currentIndex}"
+                        onchange="onChangeSelect(${currentIndex})"
+                >
+                    ${specificationInfo
+                .map(info => `<option value="${info.type}-${info.id}">${info.name}</option>`)}
+                </select>
+                <div class="valueBlock" id="valueBlock-${currentIndex}"></div>
+                <div
+                    class="removeButton waves-effect waves-teal btn-flat"
+                    onclick="removeInput(${currentIndex})"
+                >
+                    <i class="material-icons">close</i>
+                </div>
+            `;
+            newDiv.setAttribute("id", `specificationRow-${currentIndex}`);
+            newDiv.setAttribute("class", "input-field specificationRow");
+
+            container.appendChild(newDiv);
+
+            M.FormSelect.init(document.getElementById(`select-${currentIndex}`));
+
+            onChangeSelect(currentIndex);
+
+            currentIndex += 1;
+        }
+
+        function removeInput(index) {
+            const container = document.getElementById("specifications");
+            const element = document.getElementById(`specificationRow-${index}`);
+            container.removeChild(element);
+        }
+    </script>
 </th:block>

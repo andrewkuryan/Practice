@@ -2,6 +2,7 @@ package org.fekz115.task8.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class ProductEnumerableSpecification {
@@ -11,6 +12,7 @@ public class ProductEnumerableSpecification {
 
 		private int productId;
 		private int enumerableSpecificationId;
+		private int enumerableValueId;
 
 		public int getProductId() {
 			return productId;
@@ -27,6 +29,38 @@ public class ProductEnumerableSpecification {
 		public void setEnumerableSpecificationId(int enumerableSpecificationId) {
 			this.enumerableSpecificationId = enumerableSpecificationId;
 		}
+
+		public int getEnumerableValueId() {
+			return enumerableValueId;
+		}
+
+		public void setEnumerableValueId(int enumerableValueId) {
+			this.enumerableValueId = enumerableValueId;
+		}
+
+		@Override
+		public String toString() {
+			return "ProductEnumerableSpecificationPk{" +
+					"productId=" + productId +
+					", enumerableSpecificationId=" + enumerableSpecificationId +
+					", enumerableValueId=" + enumerableValueId +
+					'}';
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			PrimaryKey that = (PrimaryKey) o;
+			return productId == that.productId &&
+					enumerableSpecificationId == that.enumerableSpecificationId &&
+					enumerableValueId == that.enumerableValueId;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(productId, enumerableSpecificationId, enumerableValueId);
+		}
 	}
 
 	@EmbeddedId
@@ -38,7 +72,7 @@ public class ProductEnumerableSpecification {
 
 	@ManyToOne
 	@JoinColumn(name = "enumerableSpecificationId", updatable = false, insertable = false)
-	private EnumerableSpecification enumerableSpecificationId;
+	private EnumerableSpecification enumerableSpecification;
 
 	@ManyToOne
 	@JoinColumn(name = "enumerableValueId", updatable = false, insertable = false)
@@ -60,12 +94,12 @@ public class ProductEnumerableSpecification {
 		this.product = product;
 	}
 
-	public EnumerableSpecification getEnumerableSpecificationId() {
-		return enumerableSpecificationId;
+	public EnumerableSpecification getEnumerableSpecification() {
+		return enumerableSpecification;
 	}
 
-	public void setEnumerableSpecificationId(EnumerableSpecification enumerableSpecificationId) {
-		this.enumerableSpecificationId = enumerableSpecificationId;
+	public void setEnumerableSpecification(EnumerableSpecification enumerableSpecification) {
+		this.enumerableSpecification = enumerableSpecification;
 	}
 
 	public EnumerableValue getEnumerableValue() {
@@ -74,5 +108,14 @@ public class ProductEnumerableSpecification {
 
 	public void setEnumerableValue(EnumerableValue enumerableValue) {
 		this.enumerableValue = enumerableValue;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductEnumerableSpecification{" +
+				"productId=" + product.getId() +
+				", enumerableSpecificationId=" + enumerableSpecification.getId() +
+				", enumerableValueId=" + enumerableValue.getId() +
+				'}';
 	}
 }

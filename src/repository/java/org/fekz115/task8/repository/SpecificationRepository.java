@@ -6,11 +6,13 @@ import java.util.Optional;
 
 public interface SpecificationRepository {
 
-    boolean existsByNameAndIdNot(String name, Integer id);
+	boolean existsByNameAndIdNot(String name, Integer id);
 
-    Specification save(Specification specification);
+	Specification save(Specification specification);
 
-    Optional<Specification> findById(Integer id);
+	Iterable<Specification> findAll();
 
-    void delete(Specification specification);
+	Optional<Specification> findById(Integer id);
+
+	void delete(Specification specification);
 }

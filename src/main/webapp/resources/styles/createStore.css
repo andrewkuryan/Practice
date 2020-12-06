@@ -1,0 +1,31 @@
+.createStoreRoot {
+}
+
+.createStoreRoot #storeProducts {
+    display: flex;
+    flex-direction: column;
+}
+
+.createStoreRoot #storeProducts .productStoreContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.createStoreRoot #storeProducts .productStoreContainer .select-wrapper {
+    width: 50%;
+}
+
+.createStoreRoot #storeProducts .productStoreContainer > input {
+    width: 50%;
+    margin-left: 16px;
+}
+
+.createStoreRoot #storeProducts .existedProductStore .select-wrapper {
+    pointer-events: none;
+}
+
+.createStoreRoot #storeProducts .existedProductStore > input {
+    pointer-events: none;
+}

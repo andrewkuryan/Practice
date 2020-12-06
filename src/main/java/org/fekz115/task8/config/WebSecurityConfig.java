@@ -18,38 +18,38 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                    .antMatchers("/", "/registration", "/category", "/category/**", "/office", "/product/**", "/product", "/images/**", "/scripts/**", "/styles/**").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login") //TODO: create auth handler which will use common_page
-                    .defaultSuccessUrl("/category", true)
-                    .permitAll()
-                    .and()
-                .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/")
-                    .permitAll();
-    }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+				.authorizeRequests()
+				.antMatchers("/", "/registration", "/category", "/category/**", "/store", "/product/**", "/product", "/images/**", "/scripts/**", "/styles/**").permitAll()
+				.anyRequest().authenticated()
+				.and()
+				.formLogin()
+				.loginPage("/login")
+				.loginProcessingUrl("/login") //TODO: create auth handler which will use common_page
+				.defaultSuccessUrl("/deliveryArea/edit/99", true)
+				.permitAll()
+				.and()
+				.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/")
+				.permitAll();
+	}
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder authMgrBuilder) throws Exception {
-        authMgrBuilder
-                .userDetailsService((SpringUserService)userService)
-                .passwordEncoder(passwordEncoder());
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder authMgrBuilder) throws Exception {
+		authMgrBuilder
+				.userDetailsService((SpringUserService) userService)
+				.passwordEncoder(passwordEncoder());
+	}
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }

@@ -5,4 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JpaProductSpecificationsRepository extends ProductSpecificationsRepository, CrudRepository<ProductSpecification, ProductSpecification.PrimaryKey> {}
+public interface JpaProductSpecificationsRepository extends ProductSpecificationsRepository, CrudRepository<ProductSpecification, ProductSpecification.PrimaryKey> {
+
+}

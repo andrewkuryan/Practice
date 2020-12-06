@@ -13,6 +13,7 @@ public class Product {
 
 	private String name;
 	private String description;
+	private Double price;
 
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
@@ -29,7 +30,7 @@ public class Product {
 	@OneToMany(
 			mappedBy = "product",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<ProductSpecification> specifications = new HashSet<>();
@@ -37,7 +38,7 @@ public class Product {
 	@OneToMany(
 			mappedBy = "product",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<ProductEnumerableSpecification> enumerableSpecifications = new HashSet<>();
@@ -65,7 +66,7 @@ public class Product {
 	@OneToMany(
 			mappedBy = "store",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<ProductStore> productStores = new HashSet<>();
@@ -92,6 +93,14 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public Category getCategory() {

@@ -15,6 +15,10 @@ public class SpecificationService {
 		this.repository = repository;
 	}
 
+	public Iterable<Specification> getSpecifications() {
+		return repository.findAll();
+	}
+
 	public void save(Specification specification) throws SpecificationWithTheSameNameAlreadyExistsException {
 		if (repository.existsByNameAndIdNot(specification.getName(), specification.getId())) {
 			throw new SpecificationWithTheSameNameAlreadyExistsException();

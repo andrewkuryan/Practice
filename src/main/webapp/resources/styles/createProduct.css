@@ -1,0 +1,64 @@
+.productRoot {
+}
+
+.productRoot .file-field {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.productRoot .file-field .fileButton {
+    padding-left: 0;
+}
+
+.productRoot .file-field .file-path-wrapper {
+    width: 100%;
+}
+
+.productRoot .file-field .file-path-wrapper input {
+    width: 100%;
+}
+
+.productRoot #specifications {
+    display: flex;
+    flex-direction: column;
+}
+
+.productRoot .specificationRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productRoot .specificationRow .select-wrapper {
+    width: 50%;
+}
+
+.productRoot .specificationRow .valueBlock {
+    width: 50%;
+    margin-left: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.productRoot .specificationRow .valueBlock .select-wrapper {
+    width: 100%;
+}
+
+.productRoot .existedSpecification .select-wrapper {
+    pointer-events: none;
+}
+
+.productRoot .existedSpecification .valueBlock input {
+    pointer-events: none;
+}
+
+.productRoot .specificationRow .valueBlock .unitInput {
+    text-transform: uppercase;
+    margin-left: 16px;
+}

@@ -18,7 +18,7 @@ public class Specification {
 	@OneToMany(
 			mappedBy = "product",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<ProductSpecification> specifications = new HashSet<>();

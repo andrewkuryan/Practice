@@ -1,0 +1,68 @@
+<title xmlns:th="http://www.thymeleaf.org" th:fragment="title" th:text="#{stores}">
+</title>
+
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+          th:fragment="content">
+    <!--/*@thymesVar id="cities" type="java.lang.Iterable<org.fekz115.task8.domain.City>"*/-->
+    <div id="mapContainer" sec:authorize="!hasAnyAuthority('ADMIN', 'MANAGER')">
+        <div id="map"></div>
+        <div style="display: none" id="storeContainer" th:text="${stores}"></div>
+    </div>
+
+    <script type="text/javascript" sec:authorize="!hasAnyAuthority('ADMIN', 'MANAGER')">
+        ymaps.ready(init);
+
+        function init() {
+            const map = new ymaps.Map('map', {
+                    center: [53.31, 28.02],
+                    zoom: 6.5,
+                    controls: ['zoomControl']
+                }),
+
+                BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
+                    '<div style="margin: 0">' +
+                    '<p style="font-size: 18px; font-weight: bold">{{properties.address}}</p>' +
+                    '<p style="font-size: 16px; font-weight: normal">{{properties.phone}}</p>' +
+                    '</div>'
+                );
+
+            const stores = JSON.parse(document.getElementById("storeContainer").innerText);
+            stores.forEach(store => {
+                const placemark = new ymaps.Placemark([store.latitude, store.longitude], {
+                    balloonContentHeader: store.address,
+                    balloonContentBody: store.phone
+                });
+                map.geoObjects.add(placemark);
+            });
+        }
+    </script>
+
+    <div th:each="city : ${cities}">
+        <h3 th:text="${city.getName()}"></h3>
+        <table th:if="${!city.getStores().isEmpty()}">
+            <tr>
+                <th th:text="#{address}"></th>
+                <th th:text="#{phone_number}"></th>
+                <th:block sec:authorize="hasAuthority('ADMIN')">
+                    <th></th>
+                    <th></th>
+                </th:block>
+            </tr>
+            <tr th:each="store : ${city.getStores()}">
+                <td th:text="${store.getAddress()}"></td>
+                <td th:text="${store.getPhone()}"></td>
+                <th:block sec:authorize="hasAuthority('ADMIN')">
+                    <td>
+                        <a th:href="@{/store/edit/{id}(id=${store.getId()})}" th:text="#{edit}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/store/remove/{id}(id=${store.getId()})}" th:text="#{remove}"></a>
+                    </td>
+                </th:block>
+            </tr>
+        </table>
+    </div>
+    <div th:class="centertDivCreateCategory" sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/store/create}" th:text="#{create_store}"></a>
+    </div>
+</th:block>

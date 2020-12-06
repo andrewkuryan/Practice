@@ -51,6 +51,7 @@ val mariaJdbcVersion = "2.5.3"
 val mysqlConnectorVersion = "8.0.20"
 val hibernateVersion = "5.4.10.Final"
 val fileuploadVersion = "1.4"
+val gsonVersion = "2.8.6"
 
 dependencies {
     providedCompile("javax.servlet:javax.servlet-api:$servletApiVersion")
@@ -69,6 +70,7 @@ dependencies {
     implementation("org.springframework.security:spring-security-web:$springSecurityVersion")
     implementation("org.springframework.security:spring-security-config:$springSecurityVersion")
     implementation("commons-fileupload:commons-fileupload:$fileuploadVersion")
+    implementation("com.google.code.gson:gson:$gsonVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jupiterVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jupiterVersion")

@@ -14,15 +14,16 @@ public class DeliveryArea {
 
 	private String name;
 	private Time estimatedTime;
+	private String color;
 
 	@OneToOne
 	@JoinColumn(name = "storeId")
 	private Store store;
 
 	@OneToMany(
-			mappedBy = "city",
+			mappedBy = "deliveryArea",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<CityDeliveryArea> cityDeliveryAreas = new HashSet<>();
@@ -41,6 +42,14 @@ public class DeliveryArea {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public Time getEstimatedTime() {

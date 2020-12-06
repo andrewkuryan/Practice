@@ -1,4 +1,4 @@
-package org.fekz115.task8.service.exception.office;
+package org.fekz115.task8.service.exception.store;
 
 import org.fekz115.task8.service.exception.ServiceException;
 

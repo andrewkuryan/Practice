@@ -73,4 +73,13 @@ public class ProductSpecification implements Serializable {
 	public void setPrimaryKey(PrimaryKey primaryKey) {
 		this.primaryKey = primaryKey;
 	}
+
+	@Override
+	public String toString() {
+		return "ProductSpecification{" +
+				"productId=" + product.getId() +
+				", specificationId=" + specification.getId() +
+				", value='" + value + '\'' +
+				'}';
+	}
 }

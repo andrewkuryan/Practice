@@ -5,8 +5,12 @@
         <div th:class="textRegistration" th:text="#{edit}"></div>
 
         <input type="hidden" th:field="*{id}">
-        <!-- <label th:text="#{category_name}" for="name"></label>-->
-        <input th:class="inputAuth" type="text" id="name" th:field="*{name}" th:placeholder="#{category_name}">
-        <input type="submit" th:value="#{accept}" th:class="ButtonAuth">
+
+        <div class="input-field">
+            <input class="inputAuth" type="text" id="name" th:field="*{name}"/>
+            <label th:text="#{category_name}" for="name"></label>
+        </div>
+
+        <button type="submit" th:text="#{accept}" class="btn waves-effect waves-teal ButtonAuth"></button>
     </form>
 </th:block>

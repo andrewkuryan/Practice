@@ -1,0 +1,123 @@
+<title xmlns:th="http://www.thymeleaf.org" th:text="#{createDeliveryArea}" th:fragment="title">
+</title>
+
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+    <link rel="stylesheet" th:href="@{/styles/deliveryArea.css}">
+
+    <form method="post" th:object="${deliveryArea}" th:action="@{/deliveryArea}"
+          class="formAddorEddit deliveryAreaRoot">
+        <div id="cityInfo" style="display: none" th:text="${cityInfo}"></div>
+        <input type="hidden" th:field="*{id}">
+        <div th:class="textRegistration">Edit Delivery Areas</div>
+
+        <div class="input-field">
+            <input class="inputAuth" type="text" id="name" th:field="*{name}"/>
+            <label for="name">Delivery Area Name</label>
+        </div>
+
+        <div class="input-field">
+            <input class="inputAuth" type="text" id="color" placeholder="Click Here" th:field="*{color}"/>
+            <label for="color">Color</label>
+        </div>
+
+        <p class="formParagraph">Estimated Time</p>
+        <div class="estimatedTimeWrapper">
+            <div class="input-field">
+                <input type="number" id="estimatedDays" name="estimatedDays" th:value="${estimatedDays}"/>
+                <label for="estimatedDays">Days</label>
+            </div>
+            <div class="input-field">
+                <input type="number" id="estimatedHours" name="estimatedHours" th:value="${estimatedHours}"/>
+                <label for="estimatedHours">Hours</label>
+            </div>
+            <div class="input-field">
+                <input type="number" id="estimatedMinutes" name="estimatedMinutes" th:value="${estimatedMinutes}"/>
+                <label for="estimatedMinutes">Minutes</label>
+            </div>
+        </div>
+
+        <div class="input-field">
+            <select id="storeId" name="storeId">
+                <option
+                        th:each="store: ${stores}"
+                        th:text="${store.getAddress()}"
+                        th:value="${store.getId()}"
+                        th:selected="${store.getId() == deliveryArea.getStore()?.getId()}"
+                ></option>
+            </select>
+            <label for="storeId">Store</label>
+        </div>
+
+        <p class="formParagraph">Cities</p>
+        <div id="deliveryAreaCities">
+            <div
+                    th:each="cityDeliveryArea,rowStat: ${deliveryArea.getCityDeliveryAreas()}"
+                    th:id="${'cityContainer-' + rowStat.index}"
+                    class="input-field cityContainer"
+            >
+                <select th:name="${'city-' + rowStat.index}">
+                    <option
+                            th:text="${cityDeliveryArea.getCity().getName()}"
+                            th:value="${cityDeliveryArea.getCity().getId()}"
+                            selected
+                    ></option>
+                </select>
+                <div class="removeButton waves-effect waves-teal btn-flat"
+                     th:onclick="|removeInput(${rowStat.index})|"
+                >
+                    <i class="material-icons">close</i>
+                </div>
+            </div>
+        </div>
+        <div class="waves-effect waves-teal btn-flat addButton" onclick="addInput()">
+            <i class="material-icons">add</i>
+            Add city
+        </div>
+
+        <button type="submit" th:text="#{accept}" class="btn waves-effect waves-teal ButtonAuth"></button>
+    </form>
+
+    <script type="text/javascript">
+        const cityInfo = JSON.parse(document.getElementById("cityInfo").innerText);
+        let currentIndex = document.getElementById("deliveryAreaCities").children.length;
+
+        const colorInput = document.querySelector('#color');
+        new Huebee(colorInput, {
+            setBGColor: true,
+            saturations: 2,
+            notation: 'hex'
+        });
+
+        M.updateTextFields();
+
+        function addInput() {
+            const container = document.getElementById("deliveryAreaCities");
+            const newDiv = document.createElement("div");
+
+            newDiv.innerHTML = `
+                <select id="selectCity-${currentIndex}" name="newCity-${currentIndex}">
+                    ${cityInfo.map(info => `<option value="${info.id}">${info.name}</option>`)}
+                </select>
+                <div class="removeButton waves-effect waves-teal btn-flat"
+                     onclick="removeInput(${currentIndex})"
+                >
+                    <i class="material-icons">close</i>
+                </div>
+            `;
+            newDiv.setAttribute("id", `cityContainer-${currentIndex}`);
+            newDiv.setAttribute("class", "input-field cityContainer");
+
+            container.appendChild(newDiv);
+
+            M.FormSelect.init(document.getElementById(`selectCity-${currentIndex}`));
+
+            currentIndex += 1;
+        }
+
+        function removeInput(index) {
+            const container = document.getElementById("deliveryAreaCities");
+            const element = document.getElementById(`cityContainer-${index}`);
+            container.removeChild(element);
+        }
+    </script>
+</th:block>

@@ -18,7 +18,7 @@ public class City {
 	@OneToMany(
 			mappedBy = "city",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<Store> stores = new HashSet<>();
@@ -89,5 +89,13 @@ public class City {
 
 	public void setCityDeliveryAreas(Set<CityDeliveryArea> cityDeliveryAreas) {
 		this.cityDeliveryAreas = cityDeliveryAreas;
+	}
+
+	@Override
+	public String toString() {
+		return "City{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				'}';
 	}
 }
