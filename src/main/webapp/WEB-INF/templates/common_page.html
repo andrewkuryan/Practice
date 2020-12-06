@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!--/*@thymesVar id="page" type="java.lang.String"*/-->
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&mode=release&coordorder=latlong"
+        type="text/javascript"></script>
+<script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/huebee@2/dist/huebee.min.css">
+<script src="https://unpkg.com/huebee@2/dist/huebee.pkgd.min.js"></script>
 
 <head>
     <th:block th:insert="fragments/commons/header_commons :: header_commons"></th:block>
@@ -11,38 +20,43 @@
 
 <body>
 
-    <header th:insert="fragments/commons/nav_menu :: nav_menu"></header>
-    <section th:insert="fragments/commons/message :: message"></section>
-    <section th:class="content" th:insert="~{'fragments/pages/' + ${page} :: content}"></section>
-    <footer th:insert="fragments/commons/footer :: footer"></footer>
-    <script>
-        var i = 0;
-        var time = 3000;
-        var images = [];
-        images[0] = "images/1.jpg";
-        images[1] = "images/2.jpg";
-        images[2] = "images/3.jpg";
-        images[3] = "images/4.jpg";
-        images[4] = "images/5.jpg";
-        images[5] = "images/6.jpg";
-        images[6] = "images/7.jpg";
-        images[7] = "images/8.jpg";
-        images[8] = "images/9.jpg";
-        images[9] = "images/10.jpg";
-        images[10] = "images/0.jpg";
-        images[11] = "images/11.jpg";
+<header th:insert="fragments/commons/nav_menu :: nav_menu"></header>
+<section th:insert="fragments/commons/message :: message"></section>
+<section th:class="content" th:insert="~{'fragments/pages/' + ${page} :: content}"></section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const elems = document.querySelectorAll('select');
+        M.FormSelect.init(elems);
+    });
 
-        function slideShow() {
+    var i = 0;
+    var time = 3000;
+    var images = [];
+    images[0] = "images/1.jpg";
+    images[1] = "images/2.jpg";
+    images[2] = "images/3.jpg";
+    images[3] = "images/4.jpg";
+    images[4] = "images/5.jpg";
+    images[5] = "images/6.jpg";
+    images[6] = "images/7.jpg";
+    images[7] = "images/8.jpg";
+    images[8] = "images/9.jpg";
+    images[9] = "images/10.jpg";
+    images[10] = "images/0.jpg";
+    images[11] = "images/11.jpg";
 
-            document.slideShow.src = images[i];
-            if (i < images.length - 1) i++;
-            else i = 0;
-            // document.getElementsByClassName("imgForSlideShow").style.opacity = "1";
+    function slideShow() {
 
-            setTimeout("slideShow()", time);
-        }
-        window.onload = slideShow;
-    </script>
+        document.slideShow.src = images[i];
+        if (i < images.length - 1) i++;
+        else i = 0;
+        // document.getElementsByClassName("imgForSlideShow").style.opacity = "1";
+
+        setTimeout("slideShow()", time);
+    }
+
+    // window.onload = slideShow;
+</script>
 </body>
 
 </html>

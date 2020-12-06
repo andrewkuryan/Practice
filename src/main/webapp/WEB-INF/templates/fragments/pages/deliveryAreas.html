@@ -1,0 +1,30 @@
+<title xmlns:th="http://www.thymeleaf.org" th:fragment="title" th:text="#{deliveryAreas}">
+</title>
+
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+          th:fragment="content">
+    <table>
+        <tr>
+            <th th:text="#{deliveryAreaName}"></th>
+            <th:block sec:authorize="hasAuthority('ADMIN')">
+                <th></th>
+                <th></th>
+            </th:block>
+        </tr>
+        <tr th:each="deliveryArea : ${deliveryAreas}">
+            <td th:style="${'color: ' + deliveryArea.getColor()}" th:text="${deliveryArea.getName()}"></td>
+            <th:block sec:authorize="hasAuthority('ADMIN')">
+                <td th:class="aTDremoveAddStyle">
+                    <a th:href="@{/deliveryArea/edit/{id}(id=${deliveryArea.getId()})}" th:text="#{edit}"></a>
+                </td>
+                <td th:class="aTDremoveAddStyle">
+                    <a th:class="aAddRemoveStyle" th:href="@{/deliveryArea/remove/{id}(id=${deliveryArea.getId()})}"
+                       th:text="#{remove}"></a>
+                </td>
+            </th:block>
+        </tr>
+    </table>
+    <div sec:authorize="hasAuthority('ADMIN')" th:class="centertDivCreateCategory">
+        <a th:href="@{/deliveryArea/create}" th:text="#{createDeliveryArea}"></a>
+    </div>
+</th:block>

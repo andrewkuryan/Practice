@@ -17,7 +17,7 @@ public class EnumerableSpecification {
 	@OneToMany(
 			mappedBy = "enumerableSpecification",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<EnumerableValue> enumerableValues = new HashSet<>();
@@ -25,7 +25,7 @@ public class EnumerableSpecification {
 	@OneToMany(
 			mappedBy = "product",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<ProductEnumerableSpecification> enumerableSpecifications = new HashSet<>();

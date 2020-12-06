@@ -1,6 +1,9 @@
 package org.fekz115.task8.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Coords {
@@ -11,12 +14,6 @@ public class Coords {
 
 	private double latitude;
 	private double longitude;
-
-	@OneToOne(mappedBy = "coords")
-	private Store store;
-
-	@OneToOne(mappedBy = "coords")
-	private City city;
 
 	public int getId() {
 		return id;
@@ -42,19 +39,11 @@ public class Coords {
 		this.longitude = longitude;
 	}
 
-	public Store getStore() {
-		return store;
-	}
-
-	public void setStore(Store store) {
-		this.store = store;
-	}
-
-	public City getCity() {
-		return city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
+	@Override
+	public String toString() {
+		return "Coords{" +
+				"latitude=" + latitude +
+				", longitude=" + longitude +
+				'}';
 	}
 }

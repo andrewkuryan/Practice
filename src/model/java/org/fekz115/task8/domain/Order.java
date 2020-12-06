@@ -18,7 +18,6 @@ public class Order {
 	private Date createdAt;
 	private String status;
 	private String deliveryAddress;
-	private Double totalPrice;
 
 	@ManyToOne
 	@JoinColumn(name = "cityDeliveryAreaId")
@@ -62,14 +61,6 @@ public class Order {
 
 	public void setDeliveryAddress(String deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
-	}
-
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 
 	public CityDeliveryArea getCityDeliveryArea() {

@@ -1,7 +1,8 @@
 <title xmlns:th="http://www.thymeleaf.org" th:text="#{users}" th:fragment="title">
 </title>
 
-<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org"
+          th:fragment="content">
     <!--/*@thymesVar id="users" type="java.util.List<org.fekz115.task8.domain.User>"*/-->
     <!--/*@thymesVar id="roles" type="java.util.List<org.fekz115.task8.domain.Role>"*/-->
     <table th:if="${!users.isEmpty()}">
@@ -14,15 +15,26 @@
         <tr th:each="user : ${users}">
             <td th:text="${user.getLogin()}"></td>
             <form th:action="@{/user/save/{id}(id=${user.getId()})}">
-                <td th:class="checkbox" th:each="role : ${roles}">
-                    <input th:class="checkBoxxx" type="checkbox" th:checked="${user.getRoles().contains(role)}" th:name="${role.name()}">
+                <td th:each="role : ${roles}">
+                    <div class="checkboxWrapper">
+                        <label>
+                            <input
+                                    type="checkbox"
+                                    class="filled-in"
+                                    th:checked="${user.getRoles().contains(role)}"
+                                    th:name="${role.name()}"
+                            />
+                            <span></span>
+                        </label>
+                    </div>
                 </td>
                 <td th:class="tdAddToCart">
                     <input th:class="buttonAccept" type="submit" th:value="#{accept}">
                 </td>
             </form>
             <td th:class="aTDremoveAddStyle">
-                <a th:class="aAddRemoveStyle" th:href="@{/user/remove/{id}(id=${user.getId()})}" th:text="#{remove}"></a>
+                <a th:class="aAddRemoveStyle" th:href="@{/user/remove/{id}(id=${user.getId()})}"
+                   th:text="#{remove}"></a>
             </td>
         </tr>
     </table>

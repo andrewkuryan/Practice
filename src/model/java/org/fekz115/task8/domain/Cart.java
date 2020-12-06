@@ -16,6 +16,7 @@ public class Cart {
 	private User user;
 
 	private boolean isOrdered;
+	private Double totalPrice;
 
 	@OneToMany(
 			mappedBy = "cart",
@@ -66,5 +67,13 @@ public class Cart {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }

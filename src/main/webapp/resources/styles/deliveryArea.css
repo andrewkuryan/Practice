@@ -1,0 +1,28 @@
+.deliveryAreaRoot {
+}
+
+.deliveryAreaRoot .estimatedTimeWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deliveryAreaRoot .estimatedTimeWrapper .input-field {
+    margin-left: 16px;
+}
+
+.deliveryAreaRoot .estimatedTimeWrapper .input-field:first-child {
+    margin-left: 0;
+}
+
+.deliveryAreaRoot #deliveryAreaCities .cityContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.deliveryAreaRoot #deliveryAreaCities .select-wrapper {
+    width: 100%;
+}

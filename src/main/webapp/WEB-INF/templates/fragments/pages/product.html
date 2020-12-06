@@ -3,6 +3,7 @@
 </title>
 
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+    <link rel="stylesheet" th:href="@{/styles/product.css}">
     <!--/*@thymesVar id="product" type="org.fekz115.task8.domain.Product"*/-->
 
     <h2 th:id="categoryNameh2" th:text="${product.getCategory().getName()}"></h2>
@@ -12,30 +13,21 @@
             <td>
                 <h3 th:text="${product.getDescription()}"></h3>
             </td>
-            <td>
-
-                <h3 th:text="${product.getCost()} + '$'"></h3>
-            </td>
         </tr>
     </table>
     <div class="manyImageGalery">
 
-        <img th:class="sizeImage" th:each="photo : ${product.getPhotos()}" th:src="@{/images/{path}(path=${photo.getPath()})}">
+        <img th:class="sizeImage" th:each="photo : ${product.getPhotos()}"
+             th:src="@{/images/{path}(path=${photo.getPath()})}">
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th th:text="#{specification}"></th>
-                <th th:text="#{value}"></th>
-                <th th:text="#{units}"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="specification : ${product.getSpecifications()}">
-                <td th:text="${specification.getSpecification().getName()}"></td>
-                <td th:text="${specification.getValue()}"></td>
-                <td th:text="${specification.getSpecification().getUnits()}"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="specificationsBlock">
+        <div class="specificationItem" th:each="specification : ${product.getSpecifications()}">
+            <p th:text="${specification.getSpecification().getName() + ', ' + specification.getSpecification().getUnits()}"></p>
+            <p th:text="${specification.getValue()}"></p>
+        </div>
+        <div class="specificationItem" th:each="specification : ${product.getEnumerableSpecifications()}">
+            <p th:text="${specification.getEnumerableSpecification().getName()}"></p>
+            <p th:text="${specification.getEnumerableValue().getValue()}"></p>
+        </div>
+    </div>
 </th:block>

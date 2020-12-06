@@ -12,11 +12,11 @@ public class CityDeliveryArea {
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "deliveryAreaId", updatable = false, insertable = false)
+	@JoinColumn(name = "deliveryAreaId", updatable = false)
 	private DeliveryArea deliveryArea;
 
 	@ManyToOne
-	@JoinColumn(name = "cityId", updatable = false, insertable = false)
+	@JoinColumn(name = "cityId", updatable = false)
 	private City city;
 
 	@OneToMany(
@@ -57,5 +57,14 @@ public class CityDeliveryArea {
 
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
+	}
+
+	@Override
+	public String toString() {
+		return "CityDeliveryArea{" +
+				"id=" + id +
+				", deliveryAreaId=" + deliveryArea.getId() +
+				", cityId=" + city.getId() +
+				'}';
 	}
 }

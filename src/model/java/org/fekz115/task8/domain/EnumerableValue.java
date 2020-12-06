@@ -38,4 +38,11 @@ public class EnumerableValue {
 	public void setEnumerableSpecification(EnumerableSpecification enumerableSpecification) {
 		this.enumerableSpecification = enumerableSpecification;
 	}
+
+	@Override
+	public String toString() {
+		return "EnumerableValue{" +
+				"value='" + value + '\'' +
+				'}';
+	}
 }

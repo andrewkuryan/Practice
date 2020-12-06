@@ -1,0 +1,34 @@
+<title xmlns:th="http://www.thymeleaf.org" th:text="#{enumerableSpecifications}" th:fragment="title">
+</title>
+
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+          th:fragment="content">
+
+    <table th:if="${!specifications.isEmpty()}">
+        <tr>
+            <th th:text="#{specification_name}"></th>
+            <th th:text="#{description}"></th>
+            <th:block sec:authorize="hasAuthority('ADMIN')">
+                <th></th>
+                <th></th>
+            </th:block>
+        </tr>
+        <tr th:each="specification : ${specifications}">
+            <td th:text="${specification.getName()}"></td>
+            <td th:text="${specification.getDescription()}"></td>
+            <th:block sec:authorize="hasAuthority('ADMIN')">
+                <td>
+                    <a th:href="@{/enumerableSpecification/edit/{id}(id=${specification.getId()})}"
+                       th:text="#{edit}"></a>
+                </td>
+                <td>
+                    <a th:href="@{/enumerableSpecification/remove/{id}(id=${specification.getId()})}"
+                       th:text="#{remove}"></a>
+                </td>
+            </th:block>
+        </tr>
+    </table>
+    <div th:class="centertDivCreateCategory" sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/enumerableSpecification/create}" th:text="#{create_specification}"></a>
+    </div>
+</th:block>

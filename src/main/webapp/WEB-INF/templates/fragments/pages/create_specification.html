@@ -8,19 +8,26 @@
         xmlns:th="http://www.thymeleaf.org"
         th:fragment="content">
     <!--/*@thymesVar id="specification" type="org.fekz115.task8.domain.Specification"*/-->
-    <form th:object="${specification}" method="post" th:action="@{/specification}">
+    <form th:object="${specification}" method="post" th:action="@{/specification}" class="formAddorEddit">
         <input type="hidden" th:field="*{id}">
-        <label for="name" th:text="#{specification_name}"></label>
-        <input type="text" id="name" th:field="*{name}">
-        <label for="units" th:text="#{units}"></label>
-        <input type="text" id="units" th:field="*{units}">
-        <label for="description"></label>
-        <textarea th:field="*{description}" id="description" th:value="*{description}"></textarea>
-        <label for="categoryId" th:text="#{category}"></label>
-        <select name="categoryId" id="categoryId">
-            <!--/*@thymesVar id="categories" type="java.lang.Iterable<org.fekz115.task8.domain.Category>"*/-->
-            <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}" th:selected="${specification.getCategory()?.getId()} == ${category.getId()}"></option>
-        </select>
-        <input type="submit" th:value="#{accept}">
+
+        <div class="textRegistration">Edit Specifications</div>
+
+        <div class="input-field">
+            <input type="text" id="name" th:field="*{name}"/>
+            <label for="name" th:text="#{specification_name}"></label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" id="units" th:field="*{units}"/>
+            <label for="units" th:text="#{units}"></label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" id="description" th:field="*{description}"/>
+            <label for="description" th:text="#{description}"></label>
+        </div>
+
+        <button type="submit" th:text="#{accept}" class="btn waves-effect waves-teal ButtonAuth"></button>
     </form>
 </th:block>

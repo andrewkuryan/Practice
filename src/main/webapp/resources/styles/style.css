@@ -1,590 +1,606 @@
-    body {
-        margin: 0;
-        font-family: Arial, serif;
-    }
-    
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #523634;
-    }
-    
-    li {
-        height: 100%;
-        float: left;
-    }
-    
-    li>a {
-        display: block;
-        color: #EBB582;
-        text-align: center;
-        padding: 1.2em;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    
-    li>a:hover {
-        background-color: #301B28;
-    }
-    
-    .authDiv a {
-        display: block;
-        color: #DDC5A2;
-        text-decoration: none;
-        padding: 19px;
-        padding-right: -10px;
-        font-weight: bold;
-    }
-    
-    .authDiv a:hover {
-        background-color: #330011;
-        color: #EBB582;
-    }
-    
-    .userName {
-        color: rgb(119, 95, 83);
-        font-size: 1.5em;
-        margin-left: 1.6em;
-        margin-right: 1.6em;
-        padding-top: 13px;
-    }
-    
-    .logoutForm {
-        display: inline-block;
-    }
-    
-    .cartA {
-        display: block;
-        text-decoration: none;
-        color: #DDC5A2;
-        padding: 17px;
-        font-weight: bold;
-        margin: none;
-    }
-    
-    .singOutInputButton {
-        margin-top: 1px;
-        background: none;
-        border: none;
-        margin: none;
-        padding: 6px;
-    }
-    
-    .liCartA,
-    .liSignOut {
-        height: inherit;
-    }
-    
-    .liSignOut div form {
-        margin: none;
-    }
-    
-    .cartA:hover {
-        background-color: #330011;
-        color: #EBB582;
-    }
-    
-    .userDiv div {
-        display: inline-block;
-        margin: 0.5em;
-    }
-    
-    .userInfo {
-        text-align: right;
-    }
-    
-    .userInfo a,
-    .userInfo form input {
-        display: block;
-        color: #DDC5A2;
-        text-decoration: none;
-        padding: 19px;
-        padding-right: -10px;
-        font-weight: bold;
-    }
-    
-    footer {
-        text-align: center;
-        color: #330011;
-    }
-    
-    .content {
-        margin: 5% 15%;
-        min-height: 60vh;
-        border: 2px solid gray;
-        border-radius: 5px;
-        box-shadow: gray;
-        background-color: #DDC5A2;
-    }
-    
-    table {
-        width: 92%;
-        margin: 4%;
-        table-layout: fixed;
-        padding: 15px;
-        background-color: #f3f0e7;
-        border-radius: 20px 20px 10px 10px;
-        border: 2px solid #f5f3ed;
-    }
-    
-    table th:nth-child(1) {
-        border-bottom: none;
-    }
-    
-    tr:last-child {
-        border-bottom: none;
-    }
-    
-    th {
-        font-weight: bold;
-        border-radius: 20px;
-        color: #630a29;
-    }
-    
-    td {
-        background-color: #e4dbc36b;
-    }
-    
-    tr,
-    td,
-    th {
-        text-align: left;
-        padding: 0.4em;
-        width: 0;
-    }
-    
-    h3 {
-        font-size: large;
-        text-align: center;
-        width: 92%;
-        margin: 2.5%;
-        color: #4e011b;
-        font-weight: 700;
-        background-color: rgba(255, 255, 255, 0.445);
-        padding-top: 1.3%;
-        padding-bottom: 1.3%;
-        border-radius: 20px;
-    }
-    
-    .content a {
-        margin: 4%;
-        color: #a72626;
-        text-decoration: none;
-        width: 90%;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    
-    .content a:hover {
-        margin: 4%;
-        color: #cc0202;
-        text-decoration: none;
-    }
-    
-    .content * {
-        margin: 3%;
-    }
-    
-    .content form * {
-        display: block;
-        margin: 3%;
-    }
-    
-    .imgForSlideShow {
-        position: absolute;
-        display: block;
-        left: 35%;
-        height: 60vh;
-        z-index: 0;
-        height: 70vh;
-        top: -13%;
-        /*opacity: 0;
-    //transition: opacity 2s;*/
-    }
-    
-    header,
-    section,
-    footer {
-        position: relative;
-        z-index: 5;
-    }
-    
-    body {
-        background-color: #DDC5A2;
-        background-image: url("../images/f.png");
-    }
-    
-    .logoClass {
-        width: 43px;
-        padding-left: 40px;
-        padding-right: 30px;
-        padding-top: 10px;
-    }
-    
-    .logoClass:hover {
-        background-color: #523634;
-    }
-    
-    .liWithImage>a {
-        padding: 0;
-    }
-    
-    .liWithImage>a:hover {
-        background-color: #523634;
-    }
-    
-    .default_pageBorderNone {
-        background-color: none;
-        border: none;
-    }
-    
-    .content {
-        border: none;
-        background: none;
-    }
-    
-    .greenDivFood {
-        text-align: right;
-        padding: 40px;
-        background: #f5ca99;
-        /*#5C8F22;*/
-        font-size: 4em;
-        color: #962828;
-        font-weight: 800;
-        position: absolute;
-        float: left;
-        left: 0;
-        width: min-content;
-        height: min-content;
-        z-index: 1;
-        border-radius: 0 50px 0 50px;
-    }
-    
-    .borderDeg {
-        position: absolute;
-        z-index: 1;
-        left: 0px;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-    }
-    
-    .greenDivFood:before,
-    .greenDivFood:after,
-    .borderDeg:before,
-    .borderDeg:after {
-        position: absolute;
-        width: 92px;
-        height: 92px;
-        content: '';
-        border-color: #962828;
-        border-style: solid;
-    }
-    
-    .greenDivFood:before {
-        bottom: 0px;
-        right: 0px;
-        border-width: 0 10px 10px 0;
-    }
-    
-    .greenDivFood:after {
-        left: 0px;
-        top: 0px;
-        border-width: 10px 0 0 10px;
-    }
-    
-    .labelAuth {
-        font-size: larger;
-        font-family: cursive;
-        margin-bottom: none;
-        padding-bottom: none;
-        color: #432E33;
-    }
-    
-    .inputAuth {
-        margin-bottom: 20px;
-        padding: 5px;
-        font-size: x-large;
-        width: 85%;
-        border: 0.5px solid #523634;
-    }
-    
-    .formRegistr {
-        position: absolute;
-        top: -15%;
-        left: 20%;
-        right: 25%;
-        padding-left: 30px;
-        padding-bottom: 40px;
-        padding-top: 10px;
-        background-color: #f1e8ce;
-        /*background-color: #f3f0e7;*/
-        width: 50%;
-        border-radius: 70px;
-        /*0 70px 0 70px;*/
-        border: 3px solid #eee4c8;
-    }
-    
-    .ButtonAuth {
-        background-color: #f1deb99f;
-        display: inline-block;
-        color: #432E33;
-        font-weight: 700;
-        text-decoration: none;
-        user-select: none;
-        padding: .6em 5em;
-        outline: none;
-        border: 1px solid;
-        border-radius: 1px;
-        transition: 0.2s;
-        width: 87%;
-    }
-    
-    .ButtonAuth:hover {
-        background: rgba(255, 255, 255, .2);
-    }
-    
-    .ButtonAuth:active {
-        background: white;
-    }
-    
-    .messageDiv {
-        font-size: x-large;
-        font-weight: 800;
-        font-family: cursive;
-        text-align: center;
-        color: rgb(145, 3, 3);
-        padding-bottom: none;
-        margin-top: 10px;
-    }
-    
-    .textRegistration {
-        font-size: xx-large;
-        font-weight: 900;
-        font-family: cursive;
-        text-align: center;
-        color: #eee4c8;
-        padding-bottom: none;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        -webkit-text-stroke-color: #80593f;
-        -webkit-text-stroke-width: 1px;
-    }
-    
-    .singOutInputButton:hover {
-        color: #EBB582;
-    }
-    
-    .tdAddToCart {
-        background: none;
-        padding: 0;
-        border: 5px solid #e4dbc36b;
-    }
-    
-    .buttonAddToCart {
-        background: none;
-        margin: 0;
-        border: none;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        color: #a72626;
-    }
-    
-    .tdAddToCart:hover {
-        background-color: #e4dbc36b;
-        border-color: #f3f0e7;
-    }
-    
-    .tableOfProducts tr td,
-    .tableOfProducts tr td input,
-    td {
-        font-size: large;
-        color: #962c2c;
-    }
-    
-    .tableOfProducts tr td a {
-        color: #a72626;
-    }
-    
-    .tableOfProducts tr td a:hover {
-        color: #cc0202;
-    }
-    
-    h2 {
-        text-align: center;
-    }
-    
-    #submitButton {
-        background-color: #f1deb99f;
-        display: inline-block;
-        color: #432E33;
-        font-weight: 700;
-        text-decoration: none;
-        user-select: none;
-        padding: .6em 5em;
-        outline: none;
-        border: 1px solid;
-        border-radius: 1px;
-        transition: 0.2s;
-        width: 40%;
-    }
-    
-    #submitButton:hover {
-        background: rgba(255, 255, 255, .2);
-    }
-    
-    #categoryProduct {
-        border-collapse: collapse;
-        border-radius: 40px;
-        background-color: rgba(255, 255, 255, 0.445);
-        border: none;
-    }
-    
-    #categoryProduct tr td {
-        padding: none;
-        border-radius: 40px;
-    }
-    
-    #categoryProduct tr td:nth-child(1) h3 {
-        border-radius: 40px 0 0 40px;
-    }
-    
-    #categoryProduct tr td:nth-child(2) h3 {
-        border-radius: 0 40px 40px 0;
-    }
-    
-    #categoryProduct tr td h3 {
-        background-color: none;
-        color: #962828;
-    }
-    
-    h2 {
-        color: #4e011b;
-    }
-    
-    #productNameh2 {
-        color: #7c0a32;
-        padding: 0;
-        margin: 0;
-    }
-    
-    #productList {
-        border-radius: 20px;
-    }
-    
-    #categoryNameh2 {
-        padding: 0;
-        margin: 0;
-    }
-    
-    .aTDremoveAddStyle {
-        background-color: #f3f0e7;
-        border: 5px solid #e4dbc36b;
-        color: #a52323;
-    }
-    
-    .aTDremoveAddStyle:hover {
-        background-color: #e4dbc36b;
-        border: 5px solid #f3f0e7;
-    }
-    
-    .centertDivCreateCategory {
-        padding: 8px;
-        text-align: center;
-        border-radius: 30px;
-        width: 20%;
-        border: 3px solid #e4dbc36b;
-        background-color: #f3f0e7a8;
-        font-weight: 600;
-        margin-left: 38%;
-    }
-    
-    .centertDivCreateCategory a {
-        color: #4e011b
-    }
-    
-    .centertDivCreateCategory a:hover {
-        color: #7c0a32;
-    }
-    
-    .centertDivCreateCategory:hover {
-        background-color: #f3f0e757;
-    }
-    
-    .formAddorEddit {
-        position: absolute;
-        top: -15%;
-        left: 20%;
-        right: 25%;
-        padding-left: 30px;
-        padding-bottom: 40px;
-        padding-top: 10px;
-        background-color: #fdf4da8f;
-        width: 50%;
-        border-radius: 70px;
-        /*0 70px 0 70px;*/
-        border: 3px solid #eee4c8;
-    }
-    
-    .buttonAccept {
-        background: none;
-        margin: 0;
-        border: none;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        color: #a72626;
-        font-size: 1em;
-    }
-    
-    input[type=checkbox] {
-        transform: scale(1.5);
-        -ms-transform: scale(1.5);
-        -webkit-transform: scale(1.5);
-        padding: 10px;
-    }
-    
-    .sizeImage {
-        width: 60%;
-        margin-left: 20%;
-        margin-right: 20%;
-    }
-    
-    .costCart {
-        width: 90%;
-        border-radius: 30px;
-        background-color: #f5f3ed7c;
-        padding: 8px;
-        text-align: center;
-        font-weight: 700;
-        font-size: 1.1em;
-        margin-top: 0;
-        color: #7c0a32;
-    }
-    
-    .centeracceptbutton {
-        background-color: #f1deb99f;
-        display: inline-block;
-        color: #432E33;
-        font-weight: 700;
-        text-decoration: none;
-        user-select: none;
-        padding: .6em 5em;
-        outline: none;
-        border: 1px solid;
-        border-radius: 1px;
-        transition: 0.2s;
-        width: 90%;
-    }
-    
-    .centeracceptbutton:hover {
-        background: rgba(255, 255, 255, .2);
-    }
-    
-    #labelCart {
-        font-size: 1.7em;
-        color: #630a29;
-        font-weight: 600;
-        text-align: center;
-    }
+body {
+    margin: 0;
+    font-family: Arial, serif;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #523634;
+}
+
+li {
+    height: 100%;
+    float: left;
+}
+
+li > a {
+    display: block;
+    color: #EBB582;
+    text-align: center;
+    padding: 1.2em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+li > a:hover {
+    background-color: #301B28;
+}
+
+.authDiv a {
+    display: block;
+    color: #DDC5A2;
+    text-decoration: none;
+    padding: 19px;
+    padding-right: -10px;
+    font-weight: bold;
+}
+
+.authDiv a:hover {
+    background-color: #330011;
+    color: #EBB582;
+}
+
+.userName {
+    color: rgb(119, 95, 83);
+    font-size: 1.5em;
+    margin-left: 1.6em;
+    margin-right: 1.6em;
+    padding-top: 13px;
+}
+
+.logoutForm {
+    display: inline-block;
+}
+
+.cartA {
+    display: block;
+    text-decoration: none;
+    color: #DDC5A2;
+    padding: 17px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.singOutInputButton {
+    background: none;
+    border: none;
+    margin: 1px 0 0 0;
+    padding: 6px;
+}
+
+.liCartA,
+.liSignOut {
+    height: inherit;
+}
+
+.liSignOut div form {
+    margin: 0;
+}
+
+.cartA:hover {
+    background-color: #330011;
+    color: #EBB582;
+}
+
+.userDiv div {
+    display: inline-block;
+    margin: 0.5em;
+}
+
+.userInfo {
+    text-align: right;
+}
+
+.userInfo a,
+.userInfo form input {
+    display: block;
+    color: #DDC5A2;
+    text-decoration: none;
+    padding: 19px;
+    padding-right: -10px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    color: #330011;
+}
+
+.content {
+    margin: 5% 15%;
+    min-height: 60vh;
+    border: 2px solid gray;
+    border-radius: 5px;
+    box-shadow: gray;
+    background-color: #DDC5A2;
+}
+
+table {
+    width: 92%;
+    margin: 4%;
+    table-layout: fixed;
+    padding: 15px;
+    background-color: #f3f0e7;
+    border-radius: 20px 20px 10px 10px;
+    border: 2px solid #f5f3ed;
+}
+
+table th:nth-child(1) {
+    border-bottom: none;
+}
+
+tr:last-child {
+    border-bottom: none;
+}
+
+th {
+    font-weight: bold;
+    border-radius: 20px;
+    color: #630a29;
+}
+
+td {
+    background-color: #e4dbc36b;
+}
+
+tr,
+td,
+th {
+    text-align: left;
+    padding: 0.4em;
+    width: 0;
+}
+
+h3 {
+    font-size: large;
+    text-align: center;
+    width: 92%;
+    margin: 4%;
+    color: #4e011b;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.445);
+    padding-top: 1.3%;
+    padding-bottom: 1.3%;
+    border-radius: 20px;
+}
+
+.content a {
+    margin: 4%;
+    color: #a72626;
+    text-decoration: none;
+    width: 90%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.content a:hover {
+    margin: 4%;
+    color: #cc0202;
+    text-decoration: none;
+}
+
+.content {
+    margin: 3%;
+}
+
+.content form {
+    display: block;
+    margin: 3%;
+}
+
+.imgForSlideShow {
+    position: absolute;
+    display: block;
+    left: 35%;
+    z-index: 0;
+    height: 70vh;
+    top: -13%;
+    /*opacity: 0;
+//transition: opacity 2s;*/
+}
+
+header,
+section,
+footer {
+    position: relative;
+    z-index: 5;
+}
+
+body {
+    background-color: #DDC5A2;
+}
+
+.logoClass {
+    width: 43px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-top: 10px;
+}
+
+.logoClass:hover {
+    background-color: #523634;
+}
+
+.liWithImage > a {
+    padding: 0;
+}
+
+.liWithImage > a:hover {
+    background-color: #523634;
+}
+
+.default_pageBorderNone {
+    background-color: transparent;
+    border: none;
+}
+
+.content {
+    border: none;
+    background: none;
+}
+
+.greenDivFood {
+    text-align: right;
+    padding: 40px;
+    background: #f5ca99;
+    /*#5C8F22;*/
+    font-size: 4em;
+    color: #962828;
+    font-weight: 800;
+    position: absolute;
+    float: left;
+    left: 0;
+    width: min-content;
+    height: min-content;
+    z-index: 1;
+    border-radius: 0 50px 0 50px;
+}
+
+.borderDeg {
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.greenDivFood:before,
+.greenDivFood:after,
+.borderDeg:before,
+.borderDeg:after {
+    position: absolute;
+    width: 92px;
+    height: 92px;
+    content: '';
+    border-color: #962828;
+    border-style: solid;
+}
+
+.greenDivFood:before {
+    bottom: 0px;
+    right: 0px;
+    border-width: 0 10px 10px 0;
+}
+
+.greenDivFood:after {
+    left: 0px;
+    top: 0px;
+    border-width: 10px 0 0 10px;
+}
+
+.labelAuth {
+    font-size: larger;
+    font-family: cursive;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    color: #432E33;
+}
+
+.inputAuth {
+    margin-bottom: 20px;
+    padding: 5px;
+    font-size: x-large;
+    width: 85%;
+    border: 0.5px solid #523634;
+}
+
+.formRegistr {
+    position: absolute;
+    top: -15%;
+    left: 20%;
+    right: 25%;
+    padding-left: 30px;
+    padding-bottom: 40px;
+    padding-top: 10px;
+    background-color: #f1e8ce;
+    /*background-color: #f3f0e7;*/
+    width: 50%;
+    border-radius: 70px;
+    /*0 70px 0 70px;*/
+    border: 3px solid #eee4c8;
+}
+
+.ButtonAuth {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.messageDiv {
+    font-size: x-large;
+    font-weight: 800;
+    font-family: cursive;
+    text-align: center;
+    color: rgb(145, 3, 3);
+    padding-bottom: 0;
+    margin-top: 10px;
+}
+
+.textRegistration {
+    font-size: xx-large;
+    font-weight: 900;
+    font-family: cursive;
+    text-align: center;
+    color: #eee4c8;
+    padding-bottom: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -webkit-text-stroke-color: #80593f;
+    -webkit-text-stroke-width: 1px;
+}
+
+.singOutInputButton:hover {
+    color: #EBB582;
+}
+
+.tdAddToCart {
+    background: none;
+    padding: 0;
+    border: 5px solid #e4dbc36b;
+}
+
+.buttonAddToCart {
+    background: none;
+    margin: 0;
+    border: none;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    color: #a72626;
+}
+
+.tdAddToCart:hover {
+    background-color: #e4dbc36b;
+    border-color: #f3f0e7;
+}
+
+.tableOfProducts tr td,
+.tableOfProducts tr td input,
+td {
+    font-size: large;
+    color: #962c2c;
+}
+
+.tableOfProducts tr td a {
+    color: #a72626;
+}
+
+.tableOfProducts tr td a:hover {
+    color: #cc0202;
+}
+
+h2 {
+    text-align: center;
+}
+
+#submitButton {
+    background-color: #f1deb99f;
+    display: inline-block;
+    color: #432E33;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .6em 5em;
+    outline: none;
+    border: 1px solid;
+    border-radius: 1px;
+    transition: 0.2s;
+    width: 40%;
+}
+
+#submitButton:hover {
+    background: rgba(255, 255, 255, .2);
+}
+
+#categoryProduct {
+    border-collapse: collapse;
+    border-radius: 40px;
+    background-color: rgba(255, 255, 255, 0.445);
+    border: none;
+}
+
+#categoryProduct tr td {
+    padding: 0;
+    border-radius: 40px;
+}
+
+#categoryProduct tr td:nth-child(1) h3 {
+    border-radius: 40px 0 0 40px;
+}
+
+#categoryProduct tr td:nth-child(2) h3 {
+    border-radius: 0 40px 40px 0;
+}
+
+#categoryProduct tr td h3 {
+    background-color: transparent;
+    color: #962828;
+}
+
+h2 {
+    color: #4e011b;
+}
+
+#productNameh2 {
+    color: #7c0a32;
+    padding: 0;
+    margin: 0;
+}
+
+#productList {
+    border-radius: 20px;
+}
+
+#categoryNameh2 {
+    padding: 0;
+    margin: 0;
+}
+
+.aTDremoveAddStyle {
+    background-color: #f3f0e7;
+    border: 5px solid #e4dbc36b;
+    color: #a52323;
+}
+
+.aTDremoveAddStyle:hover {
+    background-color: #e4dbc36b;
+    border: 5px solid #f3f0e7;
+}
+
+.centertDivCreateCategory {
+    padding: 8px;
+    text-align: center;
+    border-radius: 30px;
+    width: 20%;
+    border: 3px solid #e4dbc36b;
+    background-color: #f3f0e7a8;
+    font-weight: 600;
+    margin-left: 38%;
+}
+
+.centertDivCreateCategory a {
+    color: #4e011b
+}
+
+.centertDivCreateCategory a:hover {
+    color: #7c0a32;
+}
+
+.centertDivCreateCategory:hover {
+    background-color: #f3f0e757;
+}
+
+.formAddorEddit {
+    position: absolute;
+    top: -15%;
+    left: 20%;
+    right: 25%;
+    padding: 10px 30px 40px 30px;
+    background-color: #fdf4da8f;
+    width: 50%;
+    border-radius: 70px;
+    /*0 70px 0 70px;*/
+    border: 3px solid #eee4c8;
+}
+
+.buttonAccept {
+    background: none;
+    margin: 0;
+    border: none;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    color: #a72626;
+    font-size: 1em;
+}
+
+.sizeImage {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.costCart {
+    width: 90%;
+    border-radius: 30px;
+    background-color: #f5f3ed7c;
+    padding: 8px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-top: 0;
+    color: #7c0a32;
+}
+
+.centeracceptbutton {
+    background-color: #f1deb99f;
+    display: inline-block;
+    color: #432E33;
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .6em 5em;
+    outline: none;
+    border: 1px solid;
+    border-radius: 1px;
+    transition: 0.2s;
+    width: 90%;
+}
+
+.centeracceptbutton:hover {
+    background: rgba(255, 255, 255, .2);
+}
+
+#labelCart {
+    font-size: 1.7em;
+    color: #630a29;
+    font-weight: 600;
+    text-align: center;
+}
+
+#mapContainer {
+    width: 800px;
+    height: 600px;
+    margin: auto;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.select-wrapper ul {
+    width: auto !important;
+    height: auto !important;
+}
+
+.formParagraph {
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.addButton {
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.addButton i {
+    padding-right: 8px;
+}
+
+.removeButton {
+    padding-right: 0;
+}
+
+.checkboxWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10px;
+}

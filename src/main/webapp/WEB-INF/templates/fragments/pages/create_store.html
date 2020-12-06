@@ -1,0 +1,114 @@
+<title
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="title"
+        th:text="#{create_store}">
+</title>
+
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+    <link rel="stylesheet" th:href="@{/styles/createStore.css}">
+    <!--/*@thymesVar id="office" type="org.fekz115.task8.domain.Office"*/-->
+    <form th:object="${store}" method="post" th:action="@{/store}" class="createStoreRoot formAddorEddit">
+        <div id="productsInfo" style="display: none" th:text="${productsInfo}"></div>
+        <div class="textRegistration">Edit Stores</div>
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="input-field">
+            <input type="text" id="address" th:field="*{address}">
+            <label th:text="#{address}" for="address"></label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" id="phone" th:field="*{phone}">
+            <label th:text="#{phone_number}" for="phone"></label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" id="latitude" name="latitude" th:value="${store.getCoords()?.getLatitude()}">
+            <label th:text="#{latitude}" for="latitude"></label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" id="longitude" name="longitude" th:value="${store.getCoords()?.getLongitude()}">
+            <label th:text="#{longitude}" for="longitude"></label>
+        </div>
+
+        <div class="input-field">
+            <select id="city" name="cityId">
+                <!--/*@thymesVar id="cities" type="java.lang.Iterable<org.fekz115.task8.domain.City>"*/-->
+                <option th:each="city : ${cities}" th:value="${city.getId()}" th:text="${city.getName()}"
+                        th:selected="${store.getCity()?.getId()} == ${city.getId()}"></option>
+            </select>
+            <label th:text="#{city}" for="city"></label>
+        </div>
+
+        <p class="formParagraph">Products</p>
+
+        <div id="storeProducts">
+            <div th:each="productStore, rowStat: ${store.getProductStores()}"
+                 th:id="${'productStoreContainer-' + rowStat.index}"
+                 class="input-field productStoreContainer existedProductStore"
+            >
+                <select th:name="${'product-' + rowStat.index}">
+                    <option
+                            th:value="${productStore.getProduct().getId()}"
+                            th:text="${productStore.getProduct().getName()}"
+                            selected
+                    ></option>
+                </select>
+                <input
+                        type="text"
+                        th:name="${'productCount-' + rowStat.index}"
+                        th:value="${productStore.getCount()}"
+                />
+                <div class="removeButton waves-effect waves-teal btn-flat"
+                     th:onclick="|removeInput(${rowStat.index})|"
+                >
+                    <i class="material-icons">close</i>
+                </div>
+            </div>
+        </div>
+        <div class="waves-effect waves-teal btn-flat addButton" onclick="addInput()">
+            <i class="material-icons">add</i>
+            Add product
+        </div>
+
+        <button type="submit" th:text="#{accept}" class="btn waves-effect waves-teal ButtonAuth"></button>
+    </form>
+
+    <script type="text/javascript">
+        const productsInfo = JSON.parse(document.getElementById("productsInfo").innerText);
+        let currentIndex = document.getElementById("storeProducts").children.length;
+
+        function addInput() {
+            const container = document.getElementById("storeProducts");
+            const newDiv = document.createElement("div");
+
+            newDiv.innerHTML = `
+                <select id="selectProduct-${currentIndex}" name="newProduct-${currentIndex}">
+                    ${productsInfo.map(info => `<option value="${info.id}">${info.name}</option>`)}
+                </select>
+                <input type="number" name="newProductCount-${currentIndex}"/>
+                <div class="removeButton waves-effect waves-teal btn-flat"
+                     onclick="removeInput(${currentIndex})"
+                >
+                    <i class="material-icons">close</i>
+                </div>
+            `;
+            newDiv.setAttribute("id", `productStoreContainer-${currentIndex}`);
+            newDiv.setAttribute("class", "input-field productStoreContainer");
+
+            container.appendChild(newDiv);
+
+            M.FormSelect.init(document.getElementById(`selectProduct-${currentIndex}`));
+
+            currentIndex += 1;
+        }
+
+        function removeInput(index) {
+            const container = document.getElementById("storeProducts");
+            const element = document.getElementById(`productStoreContainer-${index}`);
+            container.removeChild(element);
+        }
+    </script>
+</th:block>

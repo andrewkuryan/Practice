@@ -41,15 +41,6 @@ public class ProductStore {
 	private Store store;
 
 	private int count;
-	private double price;
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
 
 	public int getCount() {
 		return count;
@@ -81,5 +72,14 @@ public class ProductStore {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductStore{" +
+				"productId=" + getPrimaryKey().getProductId() +
+				", storeId=" + getPrimaryKey().getStoreId() +
+				", count=" + count +
+				'}';
 	}
 }
