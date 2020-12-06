@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class ProductSpecification implements Serializable {
+public class CartProduct {
 
 	@Embeddable
 	public static class PrimaryKey implements Serializable {
 
 		private int productId;
-		private int specificationId;
+		private int cartId;
 
 		public int getProductId() {
 			return productId;
@@ -20,12 +20,12 @@ public class ProductSpecification implements Serializable {
 			this.productId = productId;
 		}
 
-		public int getSpecificationId() {
-			return specificationId;
+		public int getCartId() {
+			return cartId;
 		}
 
-		public void setSpecificationId(int specificationId) {
-			this.specificationId = specificationId;
+		public void setCartId(int cartId) {
+			this.cartId = cartId;
 		}
 	}
 
@@ -37,10 +37,10 @@ public class ProductSpecification implements Serializable {
 	private Product product;
 
 	@ManyToOne
-	@JoinColumn(name = "specificationId", updatable = false, insertable = false)
-	private Specification specification;
+	@JoinColumn(name = "cartId", updatable = false, insertable = false)
+	private Cart cart;
 
-	private String value;
+	private int count;
 
 	public Product getProduct() {
 		return product;
@@ -50,20 +50,20 @@ public class ProductSpecification implements Serializable {
 		this.product = product;
 	}
 
-	public Specification getSpecification() {
-		return specification;
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setSpecification(Specification specification) {
-		this.specification = specification;
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
-	public String getValue() {
-		return value;
+	public int getCount() {
+		return count;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public PrimaryKey getPrimaryKey() {

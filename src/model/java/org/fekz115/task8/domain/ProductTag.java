@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class ProductSpecification implements Serializable {
+public class ProductTag {
 
 	@Embeddable
 	public static class PrimaryKey implements Serializable {
 
 		private int productId;
-		private int specificationId;
+		private int tagId;
 
 		public int getProductId() {
 			return productId;
@@ -20,12 +20,12 @@ public class ProductSpecification implements Serializable {
 			this.productId = productId;
 		}
 
-		public int getSpecificationId() {
-			return specificationId;
+		public int getTagId() {
+			return tagId;
 		}
 
-		public void setSpecificationId(int specificationId) {
-			this.specificationId = specificationId;
+		public void setTagId(int tagId) {
+			this.tagId = tagId;
 		}
 	}
 
@@ -37,10 +37,8 @@ public class ProductSpecification implements Serializable {
 	private Product product;
 
 	@ManyToOne
-	@JoinColumn(name = "specificationId", updatable = false, insertable = false)
-	private Specification specification;
-
-	private String value;
+	@JoinColumn(name = "tagId", updatable = false, insertable = false)
+	private Tag tag;
 
 	public Product getProduct() {
 		return product;
@@ -50,20 +48,12 @@ public class ProductSpecification implements Serializable {
 		this.product = product;
 	}
 
-	public Specification getSpecification() {
-		return specification;
+	public Tag getTag() {
+		return tag;
 	}
 
-	public void setSpecification(Specification specification) {
-		this.specification = specification;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
 
 	public PrimaryKey getPrimaryKey() {
