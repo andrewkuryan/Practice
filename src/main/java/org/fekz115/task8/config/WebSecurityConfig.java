@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.loginPage("/login")
 				.loginProcessingUrl("/login") //TODO: create auth handler which will use common_page
-				.defaultSuccessUrl("/category", true)
+				.defaultSuccessUrl("/product", true)
 				.permitAll()
 				.and()
 				.logout()

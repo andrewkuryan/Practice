@@ -31,7 +31,9 @@ public class CartService {
 				.findFirst());
 	}
 
-	public void save(List<CartProduct> newProducts) {
+	public void save(List<CartProduct> newProducts, List<CartProduct> oldProducts) {
+		oldProducts.forEach(cartProductRepository::delete);
+
 		newProducts.forEach(cartProductRepository::save);
 	}
 }

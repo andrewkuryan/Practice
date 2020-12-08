@@ -322,7 +322,7 @@ public class ProductController {
 		cartProduct.setPrimaryKey(pk);
 		cartProduct.setCount(1);
 
-		cartService.save(Collections.singletonList(cartProduct));
+		cartService.save(Collections.singletonList(cartProduct), Collections.emptyList());
 
 		return new ModelAndView("redirect:/product/" + id);
 	}

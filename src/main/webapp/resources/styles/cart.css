@@ -1,0 +1,10 @@
+.cartTable {
+    margin: 4% 4% 0;
+}
+
+.totalPriceBlock {
+    width: 92%;
+    margin: 16px 4% 32px;
+    font-size: large;
+    color: #962c2c;
+}

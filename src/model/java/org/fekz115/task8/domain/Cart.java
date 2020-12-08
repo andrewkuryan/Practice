@@ -21,7 +21,7 @@ public class Cart {
 	@OneToMany(
 			mappedBy = "cart",
 			fetch = FetchType.EAGER, //TODO: make LAZY
-			cascade = CascadeType.PERSIST,
+			cascade = CascadeType.REMOVE,
 			orphanRemoval = true
 	)
 	private Set<CartProduct> cartProducts = new HashSet<>();

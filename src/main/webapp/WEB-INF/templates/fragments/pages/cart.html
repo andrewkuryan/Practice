@@ -2,11 +2,13 @@
 </title>
 
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+    <link rel="stylesheet" th:href="@{/styles/cart.css}">
 
-    <table>
+    <table class="cartTable">
         <tr>
             <th th:text="#{product_name}"></th>
             <th th:text="#{price}"></th>
+            <th></th>
         </tr>
         <tr th:each="cartProduct : ${cart.getCartProducts()}">
             <td>
@@ -16,8 +18,15 @@
                 ></a>
             </td>
             <td th:text="${cartProduct.getProduct().getPrice()}"></td>
+            <td class="aTDremoveAddStyle">
+                <a class="aAddRemoveStyle"
+                   th:href="@{/cart/remove/{productId}(productId=${cartProduct.getProduct().getId()})}"
+                   th:text="#{remove}"
+                ></a>
+            </td>
         </tr>
     </table>
+    <div class="totalPriceBlock" th:text="${'Total price: $' + cart.getTotalPrice()}"></div>
 
     <div th:class="centertDivCreateCategory">
         <a href="#">Create Order</a>
