@@ -32,7 +32,7 @@
 
     <div th:each="city : ${cities}">
         <h3 th:text="${city.getName()}"></h3>
-        <table th:if="${!city.getStores().isEmpty()}">
+        <table th:if="${city.getStores().size() > 0}">
             <tr>
                 <th th:text="#{address}"></th>
                 <th th:text="#{phone_number}"></th>

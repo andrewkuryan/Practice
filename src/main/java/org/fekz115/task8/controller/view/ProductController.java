@@ -9,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
+import java.security.Principal;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -70,6 +69,8 @@ public class ProductController {
 	private final PhotosService photosService;
 	private final SpecificationService specificationService;
 	private final EnumerableSpecificationService enumerableSpecificationService;
+	private final CartService cartService;
+	private final UserService userService;
 	private final Gson gson;
 
 	public ProductController(
@@ -78,7 +79,9 @@ public class ProductController {
 			EnumerableValueService enumerableValueService,
 			PhotosService photosService,
 			SpecificationService specificationService,
-			EnumerableSpecificationService enumerableSpecificationService
+			EnumerableSpecificationService enumerableSpecificationService,
+			CartService cartService,
+			UserService userService
 	) {
 		this.categoryService = categoryService;
 		this.productService = productService;
@@ -86,6 +89,8 @@ public class ProductController {
 		this.photosService = photosService;
 		this.specificationService = specificationService;
 		this.enumerableSpecificationService = enumerableSpecificationService;
+		this.cartService = cartService;
+		this.userService = userService;
 		this.gson = new Gson();
 	}
 
@@ -268,7 +273,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public String getProductPage(@PathVariable Integer id, Model model) {
+	public String getProductPage(@PathVariable Integer id, Principal principal, Model model) {
 		Product product = new Product();
 		product.setId(id);
 		product = productService.getProduct(product).get();
@@ -287,6 +292,17 @@ public class ProductController {
 				.map(gson::toJson)
 				.collect(Collectors.toList());
 
+		if (principal != null) {
+			cartService.getActiveCart(userService.getUserByLogin(principal.getName()))
+					.ifPresent(cart -> {
+						var isInCart = cart.getCartProducts().stream()
+								.anyMatch(cartProduct -> cartProduct.getProduct().getId() == id);
+						model.addAttribute("isInCart", isInCart);
+					});
+		} else {
+			model.addAttribute("isInCart", false);
+		}
+
 		model.addAttribute("product", product);
 		model.addAttribute("nonEmptyStores", nonEmptyStores);
 		model.addAttribute("nonEmptyStoresInfo", nonEmptyStoresInfo);
@@ -294,4 +310,20 @@ public class ProductController {
 		return "common_page";
 	}
 
+	@GetMapping("/{id}/cart")
+	public ModelAndView addToCart(@PathVariable Integer id, Principal principal, Model model) {
+		Optional<Cart> cart = cartService
+				.getActiveCart(userService.getUserByLogin(principal.getName()));
+
+		CartProduct cartProduct = new CartProduct();
+		CartProduct.PrimaryKey pk = new CartProduct.PrimaryKey();
+		pk.setProductId(id);
+		pk.setCartId(cart.get().getId());
+		cartProduct.setPrimaryKey(pk);
+		cartProduct.setCount(1);
+
+		cartService.save(Collections.singletonList(cartProduct));
+
+		return new ModelAndView("redirect:/product/" + id);
+	}
 }

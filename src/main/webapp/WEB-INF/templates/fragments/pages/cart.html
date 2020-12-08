@@ -3,57 +3,24 @@
 
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
 
-    <div>
-        <table id="productList">
-        </table>
-        <div id="cost" th:class="costCart"></div>
+    <table>
+        <tr>
+            <th th:text="#{product_name}"></th>
+            <th th:text="#{price}"></th>
+        </tr>
+        <tr th:each="cartProduct : ${cart.getCartProducts()}">
+            <td>
+                <a
+                        th:href="@{/product/{productId}(productId=${cartProduct.getProduct().getId()})}"
+                        th:text="${cartProduct.getProduct().getName()}"
+                ></a>
+            </td>
+            <td th:text="${cartProduct.getProduct().getPrice()}"></td>
+        </tr>
+    </table>
+
+    <div th:class="centertDivCreateCategory">
+        <a href="#">Create Order</a>
     </div>
-
-
-
-
-    <form id="createOrderForm" method="post" th:action="@{/order/create}">
-        <div th:class="selectCart" style="display:flex">
-            <label th:id="labelCart" th:text="#{address}" for="address"></label>
-            <input th:class="inputAuth" type="text" name="address" id="address"></div>
-
-        <input th:class="centeracceptbutton" type="submit" th:value="#{accept}">
-    </form>
-
-
-    <script>
-        function renderProductList() {
-
-            let table = document.getElementById("productList");
-            let costDiv = document.getElementById("cost");
-            let cost = 0;
-            getProductList().forEach((item) => {
-                let tr = document.createElement("tr");
-                let td1 = document.createElement("td");
-                td1.innerText = item.name;
-                tr.appendChild(td1);
-                let td2 = document.createElement("td");
-                td2.innerText = `${item.cost}$`;
-                tr.appendChild(td2);
-                table.appendChild(tr);
-                cost += parseInt(item.cost, 10);
-            });
-            costDiv.innerText = `${cost}$`;
-        }
-
-        if (getProductList() == null || getProductList().length < 1) {
-            document.getElementById("submitButton").disabled = "disabled";
-        } else {
-            let form = document.getElementById("createOrderForm");
-            getProductList().forEach((item, index) => {
-                let products = document.createElement("input");
-                products.type = "hidden";
-                products.name = `products[]`;
-                products.value = item.id;
-                form.appendChild(products);
-            });
-            renderProductList();
-        }
-    </script>
 
 </th:block>

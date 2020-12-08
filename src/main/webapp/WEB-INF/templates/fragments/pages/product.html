@@ -2,7 +2,8 @@
     <!--/*@thymesVar id="product" type="org.fekz115.task8.domain.Product"*/-->
 </title>
 
-<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+          th:fragment="content">
     <link rel="stylesheet" th:href="@{/styles/product.css}">
 
     <div id="nonEmptyStoresInfo" style="display: none" th:text="${nonEmptyStoresInfo}"></div>
@@ -56,18 +57,28 @@
                     <a
                             th:each="photo : ${product.getPhotos()}"
                             class="carousel-item"
-                            href="@{/images/{path}(path=${photo.getPath()})}"
+                            th:href="@{/images/{path}(path=${photo.getPath()})}"
                     >
                         <img th:src="@{/images/{path}(path=${photo.getPath()})}"/>
                     </a>
                 </div>
-                <div class="addToCartBlock">
-                    <button
+                <div class="addToCartBlock"
+                     sec:authorize="hasAuthority('USER') && !hasAnyAuthority('ADMIN', 'MANAGER')">
+                    <a
                             class="btn waves-effect waves-teal addToCartButton"
+                            th:if="${!isInCart}"
                             th:disabled="${nonEmptyStores.size() <= 0}"
+                            th:href="@{/product/{productId}/cart(productId=${product.getId()})}"
                     >
                         <i class="material-icons">add_shopping_cart</i>
                         Add to cart
+                    </a>
+                    <button
+                            class="btn waves-effect waves-teal addToCartButton"
+                            th:if="${isInCart}"
+                            disabled
+                    >
+                        Already in cart
                     </button>
                     <button
                             class="btn-flat waves-effect waves-teal modal-trigger butStoreMap"

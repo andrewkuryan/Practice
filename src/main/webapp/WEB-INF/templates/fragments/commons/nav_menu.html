@@ -4,7 +4,7 @@
         <li th:class="liWithImage">
             <a th:href="@{/default_page}"><img th:src="@{images/lll.png}" th:class="logoClass"></a>
         </li>
-        <li>
+        <li sec:authorize="hasAuthority('ADMIN')">
             <a th:href="@{/category}" th:text="#{categories}"></a>
         </li>
         <li>
@@ -59,7 +59,7 @@
             <li style="float:right" th:class="liCartA"
                 sec:authorize="hasAuthority('USER') && !hasAnyAuthority('ADMIN', 'MANAGER')">
                 <div th:class="userInfo">
-                    <a th:class="cartA" th:text="#{cart}" th:href="@{/order/cart}"></a>
+                    <a th:class="cartA" th:text="#{cart}" th:href="@{/cart}"></a>
                 </div>
             </li>
             <li style="float:right">

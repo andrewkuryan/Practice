@@ -73,4 +73,13 @@ public class CartProduct {
 	public void setPrimaryKey(PrimaryKey primaryKey) {
 		this.primaryKey = primaryKey;
 	}
+
+	@Override
+	public String toString() {
+		return "CartProduct{" +
+				"productId=" + primaryKey.getProductId() +
+				", cartId=" + primaryKey.getCartId() +
+				", count=" + count +
+				'}';
+	}
 }
