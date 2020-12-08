@@ -81,10 +81,31 @@
         const cityInfo = JSON.parse(document.getElementById("cityInfo").innerText);
         let currentIndex = document.getElementById("deliveryAreaCities").children.length;
 
+        const ymapColors = {
+            blue: '#1E98FF',
+            red: '#ED4543',
+            darkOrange: '#E6761B',
+            night: '#0E4779',
+            darkBlue: '#177BC9',
+            pink: '#F371D1',
+            gray: '#B3B3B3',
+            brown: '#793D0E',
+            darkGreen: '#1BAD03',
+            violet: '#B51EFF',
+            black: '#595959',
+            yellow: '#FFD21E',
+            green: '#56DB40',
+            orange: '#FF931E',
+            lightBlue: '#82CDFF',
+            olive: '#97A100',
+        }
+
         const colorInput = document.querySelector('#color');
         new Huebee(colorInput, {
             setBGColor: true,
-            saturations: 2,
+            customColors: Object.values(ymapColors),
+            saturations: 0,
+            shades: 0,
             notation: 'hex'
         });
 

@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    font-family: Arial, serif;
 }
 
 ul {
@@ -292,36 +291,11 @@ body {
     border-width: 10px 0 0 10px;
 }
 
-.labelAuth {
-    font-size: larger;
-    font-family: cursive;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    color: #432E33;
-}
-
 .inputAuth {
     margin-bottom: 20px;
     padding: 5px;
     font-size: x-large;
     width: 85%;
-    border: 0.5px solid #523634;
-}
-
-.formRegistr {
-    position: absolute;
-    top: -15%;
-    left: 20%;
-    right: 25%;
-    padding-left: 30px;
-    padding-bottom: 40px;
-    padding-top: 10px;
-    background-color: #f1e8ce;
-    /*background-color: #f3f0e7;*/
-    width: 50%;
-    border-radius: 70px;
-    /*0 70px 0 70px;*/
-    border: 3px solid #eee4c8;
 }
 
 .ButtonAuth {
@@ -443,12 +417,6 @@ h2 {
     color: #4e011b;
 }
 
-#productNameh2 {
-    color: #7c0a32;
-    padding: 0;
-    margin: 0;
-}
-
 #productList {
     border-radius: 20px;
 }
@@ -501,7 +469,6 @@ h2 {
     background-color: #fdf4da8f;
     width: 50%;
     border-radius: 70px;
-    /*0 70px 0 70px;*/
     border: 3px solid #eee4c8;
 }
 
@@ -513,12 +480,6 @@ h2 {
     box-sizing: border-box !important;
     color: #a72626;
     font-size: 1em;
-}
-
-.sizeImage {
-    width: 60%;
-    margin-left: 20%;
-    margin-right: 20%;
 }
 
 .costCart {

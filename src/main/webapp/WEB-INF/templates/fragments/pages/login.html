@@ -2,24 +2,19 @@
 </title>
 
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
-    <!-- <div th:if="${param.error}" th:class="messageDivLogin">
-        Invalid username and password.
-    </div>
-    <div th:if="${param.logout}" th:class="messageDivLogin">
-        You have been logged out.
-    </div>-->
-    <form th:action="@{/login}" method="post" th:class="formRegistr">
+    <form th:action="@{/login}" method="post" th:class="formAddorEddit">
         <div th:class="textRegistration" th:text="#{signin}"></div>
-        <div>
-            <!--<label for="login" th:text="#{login}" th:class="labelAuth"></label>-->
-            <input type="text" name="username" id="login" th:class="inputAuth" th:placeholder="#{login}" />
+
+        <div class="input-field">
+            <input type="text" name="username" id="login" class="inputAuth"/>
+            <label for="login" th:text="#{login}"></label>
         </div>
-        <div>
-            <!--<label for="password" th:text="#{password}" th:class="labelAuth"></label>-->
-            <input type="password" name="password" id="password" th:class="inputAuth" th:placeholder="#{password}" />
+
+        <div class="input-field">
+            <input type="password" name="password" id="password" class="inputAuth"/>
+            <label for="password" th:text="#{password}"></label>
         </div>
-        <div>
-            <input type="submit" th:value="#{signin}" th:class="ButtonAuth" />
-        </div>
+
+        <button type="submit" th:text="#{signin}" class="btn waves-effect waves-teal ButtonAuth"></button>
     </form>
 </th:block>

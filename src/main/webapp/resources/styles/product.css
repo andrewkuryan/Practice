@@ -1,22 +1,177 @@
-.specificationsBlock {
+.showProductBlock {
+    width: 80%;
+    border-radius: 70px;
+    padding: 10px 30px 40px 30px;
+    background-color: wheat;
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 }
 
+#productStoreModal .modal-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    height: 502px;
+}
+
+#productStoreModal .modal-content .infoBox {
+    width: 30%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+#productStoreModal .modal-content .infoBox .storeAddress {
+    clear: both;
+    height: auto;
+    width: 100%;
+}
+
+#productStoreModal .modal-content .infoBox .storeAddress:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+#productStoreModal .modal-content #productStoreMap {
+    width: 68%;
+    height: 500px;
+}
+
+.productTopBlock {
+    width: 100%;
+    min-height: 540px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.productTopBlock .leftBlock {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.productTopBlock .leftBlock .addToCartBlock {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.productTopBlock .leftBlock .addToCartBlock .addToCartButton {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.productTopBlock .leftBlock .addToCartBlock .addToCartButton i {
+    margin-right: 8px;
+}
+
+.productTopBlock .leftBlock .addToCartBlock .butStoreMap {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.productTopBlock .leftBlock .addToCartBlock .butStoreMap i {
+    margin-right: 8px;
+}
+
+.productTopBlock .carousel {
+    width: 100%;
+    height: 500px;
+}
+
+.productTopBlock .carousel a {
+    height: 380px;
+    width: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.productTopBlock .carousel img {
+    width: auto;
+    height: 100%;
+}
+
+.productTopBlock .mainInfoBlock {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 32px;
+    margin-top: 60px;
+    text-align: left;
+}
+
+.productTopBlock .mainInfoBlock #productNameh2 {
+    color: #7c0a32;
+    font-size: 26px;
+    padding: 0;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.productTopBlock .mainInfoBlock .productPrice {
+    margin: 0 0 20px 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.productTopBlock .mainInfoBlock .productDescription {
+    margin: 0;
+    font-size: 18px;
+}
+
+.specificationsBlock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+}
+
 .specificationsBlock .specificationItem {
-    width: 92%;
-    font-size: 22px;
-    color: #4e011b;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 8px;
+}
+
+.specificationsBlock .specificationItem:last-child {
+    margin-bottom: 0;
+}
+
+.specificationsBlock .specificationItem p {
+    margin: 0;
+    font-size: 18px;
 }
 
 .specificationsBlock .specificationItem p:first-child {
     font-weight: bold;
+    color: gray;
 }
 
 .specificationsBlock .specificationItem p:last-child {

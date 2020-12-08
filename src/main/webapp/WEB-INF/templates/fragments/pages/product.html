@@ -4,30 +4,113 @@
 
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
     <link rel="stylesheet" th:href="@{/styles/product.css}">
-    <!--/*@thymesVar id="product" type="org.fekz115.task8.domain.Product"*/-->
 
-    <h2 th:id="categoryNameh2" th:text="${product.getCategory().getName()}"></h2>
-    <h2 th:id="productNameh2" th:text="${product.getName()}"></h2>
-    <table id="categoryProduct">
-        <tr>
-            <td>
-                <h3 th:text="${product.getDescription()}"></h3>
-            </td>
-        </tr>
-    </table>
-    <div class="manyImageGalery">
+    <div id="nonEmptyStoresInfo" style="display: none" th:text="${nonEmptyStoresInfo}"></div>
 
-        <img th:class="sizeImage" th:each="photo : ${product.getPhotos()}"
-             th:src="@{/images/{path}(path=${photo.getPath()})}">
-    </div>
-    <div class="specificationsBlock">
-        <div class="specificationItem" th:each="specification : ${product.getSpecifications()}">
-            <p th:text="${specification.getSpecification().getName() + ', ' + specification.getSpecification().getUnits()}"></p>
-            <p th:text="${specification.getValue()}"></p>
-        </div>
-        <div class="specificationItem" th:each="specification : ${product.getEnumerableSpecifications()}">
-            <p th:text="${specification.getEnumerableSpecification().getName()}"></p>
-            <p th:text="${specification.getEnumerableValue().getValue()}"></p>
+    <div id="productStoreModal" class="modal">
+        <div class="modal-content">
+            <ul class="collection infoBox">
+                <li
+                        th:each="productStore: ${nonEmptyStores}"
+                        class="collection-item storeAddress"
+                        th:data-id="${productStore.getStore().getAddress()}"
+                        onclick="selectPlacemark(this.getAttribute('data-id'))"
+                        th:text="${productStore.getStore().getAddress()}"
+                ></li>
+            </ul>
+            <div id="productStoreMap"></div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        ymaps.ready(init);
+
+        const nonEmptyStoresInfo = JSON.parse(document.getElementById("nonEmptyStoresInfo").innerText);
+        let map;
+
+        function selectPlacemark(storeAddress) {
+            const store = nonEmptyStoresInfo.find(store => store.address === storeAddress);
+            map.setCenter([store.latitude, store.longitude], 18);
+        }
+
+        function init() {
+            map = new ymaps.Map('productStoreMap', {
+                center: [53.31, 28.02],
+                zoom: 6,
+                controls: ['zoomControl']
+            });
+
+            nonEmptyStoresInfo.forEach(store => {
+                const placemark = new ymaps.Placemark([store.latitude, store.longitude], {}, {
+                    preset: `islands#blueDotIcon`,
+                });
+                map.geoObjects.add(placemark);
+            });
+        }
+    </script>
+
+    <div class="showProductBlock">
+        <div class="productTopBlock">
+            <div class="leftBlock">
+                <div class="carousel">
+                    <a
+                            th:each="photo : ${product.getPhotos()}"
+                            class="carousel-item"
+                            href="@{/images/{path}(path=${photo.getPath()})}"
+                    >
+                        <img th:src="@{/images/{path}(path=${photo.getPath()})}"/>
+                    </a>
+                </div>
+                <div class="addToCartBlock">
+                    <button
+                            class="btn waves-effect waves-teal addToCartButton"
+                            th:disabled="${nonEmptyStores.size() <= 0}"
+                    >
+                        <i class="material-icons">add_shopping_cart</i>
+                        Add to cart
+                    </button>
+                    <button
+                            class="btn-flat waves-effect waves-teal modal-trigger butStoreMap"
+                            data-target="productStoreModal"
+                            th:if="${nonEmptyStores.size() > 0}"
+                    >
+                        <i class="material-icons">location_on</i>
+                        In stock
+                    </button>
+                    <button
+                            class="btn-flat waves-effect waves-teal butStoreMap"
+                            th:if="${nonEmptyStores.size() <= 0}"
+                            disabled
+                    >
+                        Not available
+                    </button>
+                </div>
+            </div>
+            <div class="mainInfoBlock">
+                <h2 id="productNameh2" th:text="${product.getName()}"></h2>
+                <p class="productPrice" th:text="${'$' + product.getPrice()}"></p>
+                <p class="productDescription" th:text="${product.getDescription()}"></p>
+
+                <div class="specificationsBlock">
+                    <div class="specificationItem" th:each="specification : ${product.getEnumerableSpecifications()}">
+                        <p th:text="${specification.getEnumerableSpecification().getName()}"></p>
+                        <p th:text="${specification.getEnumerableValue().getValue()}"></p>
+                    </div>
+                    <div class="specificationItem" th:each="specification : ${product.getSpecifications()}">
+                        <p th:text="${specification.getSpecification().getName()}"></p>
+                        <p th:text="${specification.getValue()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            const elems = document.querySelectorAll('.carousel', {
+                indicators: true,
+            });
+            M.Carousel.init(elems);
+        });
+    </script>
 </th:block>

@@ -3,9 +3,60 @@
 
 <th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
           th:fragment="content">
+    <div id="mapContainer">
+        <div id="map"></div>
+        <div style="display: none" id="cityContainer" th:text="${deliveryAreaInfo}"></div>
+    </div>
+
+    <script type="text/javascript">
+        ymaps.ready(init);
+
+        const ymapColors = {
+            blue: '#1E98FF',
+            red: '#ED4543',
+            darkOrange: '#E6761B',
+            night: '#0E4779',
+            darkBlue: '#177BC9',
+            pink: '#F371D1',
+            gray: '#B3B3B3',
+            brown: '#793D0E',
+            darkGreen: '#1BAD03',
+            violet: '#B51EFF',
+            black: '#595959',
+            yellow: '#FFD21E',
+            green: '#56DB40',
+            orange: '#FF931E',
+            lightBlue: '#82CDFF',
+            olive: '#97A100',
+        }
+
+        function init() {
+            const map = new ymaps.Map('map', {
+                center: [53.31, 28.02],
+                zoom: 6.5,
+                controls: ['zoomControl']
+            });
+
+            const cities = JSON.parse(document.getElementById("cityContainer").innerText);
+            cities.forEach(city => {
+                let colorName = 'blue';
+                for ([key, value] of Object.entries(ymapColors)) {
+                    if (value === city.color) {
+                        colorName = key;
+                    }
+                }
+                const placemark = new ymaps.Placemark([city.latitude, city.longitude], {}, {
+                    preset: `islands#${colorName}DotIcon`,
+                });
+                map.geoObjects.add(placemark);
+            });
+        }
+    </script>
+
     <table>
         <tr>
             <th th:text="#{deliveryAreaName}"></th>
+            <th>Estimated Time</th>
             <th:block sec:authorize="hasAuthority('ADMIN')">
                 <th></th>
                 <th></th>
@@ -13,6 +64,7 @@
         </tr>
         <tr th:each="deliveryArea : ${deliveryAreas}">
             <td th:style="${'color: ' + deliveryArea.getColor()}" th:text="${deliveryArea.getName()}"></td>
+            <td th:text="${T(org.fekz115.task8.util.Utils).formatTime(deliveryArea.getEstimatedTime())}"></td>
             <th:block sec:authorize="hasAuthority('ADMIN')">
                 <td th:class="aTDremoveAddStyle">
                     <a th:href="@{/deliveryArea/edit/{id}(id=${deliveryArea.getId()})}" th:text="#{edit}"></a>

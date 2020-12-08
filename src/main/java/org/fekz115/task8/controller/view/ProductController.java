@@ -17,6 +17,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+class ProductStoreInfo {
+
+	private double latitude;
+	private double longitude;
+	private String address;
+	private int count;
+
+	ProductStoreInfo(double latitude, double longitude, String address, int count) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.address = address;
+		this.count = count;
+	}
+}
+
 class EnumerableValueInfo {
 
 	private int id;
@@ -257,7 +272,24 @@ public class ProductController {
 		Product product = new Product();
 		product.setId(id);
 		product = productService.getProduct(product).get();
+
+		var nonEmptyStores = product.getProductStores().stream()
+				.filter(store -> store.getCount() > 0)
+				.collect(Collectors.toList());
+
+		var nonEmptyStoresInfo = nonEmptyStores.stream()
+				.map(store -> new ProductStoreInfo(
+						store.getStore().getCoords().getLatitude(),
+						store.getStore().getCoords().getLongitude(),
+						store.getStore().getAddress(),
+						store.getCount()
+				))
+				.map(gson::toJson)
+				.collect(Collectors.toList());
+
 		model.addAttribute("product", product);
+		model.addAttribute("nonEmptyStores", nonEmptyStores);
+		model.addAttribute("nonEmptyStoresInfo", nonEmptyStoresInfo);
 		model.addAttribute("page", "product");
 		return "common_page";
 	}

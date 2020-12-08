@@ -14,17 +14,10 @@
 
         function init() {
             const map = new ymaps.Map('map', {
-                    center: [53.31, 28.02],
-                    zoom: 6.5,
-                    controls: ['zoomControl']
-                }),
-
-                BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-                    '<div style="margin: 0">' +
-                    '<p style="font-size: 18px; font-weight: bold">{{properties.address}}</p>' +
-                    '<p style="font-size: 16px; font-weight: normal">{{properties.phone}}</p>' +
-                    '</div>'
-                );
+                center: [53.31, 28.02],
+                zoom: 6.5,
+                controls: ['zoomControl']
+            });
 
             const stores = JSON.parse(document.getElementById("storeContainer").innerText);
             stores.forEach(store => {

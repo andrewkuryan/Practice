@@ -12,6 +12,8 @@ public class Product {
 	private int id;
 
 	private String name;
+
+	@Column(columnDefinition = "TEXT")
 	private String description;
 	private Double price;
 
@@ -64,7 +66,7 @@ public class Product {
 	private Set<ProductTag> productTags = new HashSet<>();
 
 	@OneToMany(
-			mappedBy = "store",
+			mappedBy = "product",
 			fetch = FetchType.EAGER, //TODO: make LAZY
 			cascade = CascadeType.REMOVE,
 			orphanRemoval = true

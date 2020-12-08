@@ -25,13 +25,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/", "/registration", "/category", "/category/**", "/store", "/product/**", "/product", "/images/**", "/scripts/**", "/styles/**").permitAll()
+				.antMatchers("/", "/registration", "/category", "/category/**", "/store", "/deliveryArea", "/product/**", "/product", "/images/**", "/scripts/**", "/styles/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login")
 				.loginProcessingUrl("/login") //TODO: create auth handler which will use common_page
-				.defaultSuccessUrl("/deliveryArea/edit/99", true)
+				.defaultSuccessUrl("/category", true)
 				.permitAll()
 				.and()
 				.logout()

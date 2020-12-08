@@ -7,6 +7,7 @@ import org.fekz115.task8.domain.Store;
 import org.fekz115.task8.service.CityService;
 import org.fekz115.task8.service.DeliveryAreaService;
 import org.fekz115.task8.service.StoreService;
+import org.fekz115.task8.util.Utils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,19 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+class CityMapInfo {
+
+	private double latitude;
+	private double longitude;
+	private String color;
+
+	CityMapInfo(double latitude, double longitude, String color) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.color = color;
+	}
+}
 
 class CityInfo {
 
@@ -48,7 +62,19 @@ public class DeliveryAreaController {
 
 	@GetMapping
 	public String all(Model model) {
-		model.addAttribute("deliveryAreas", deliveryAreaService.getDeliveryAreas());
+		var deliveryAreas = deliveryAreaService.getDeliveryAreas();
+		var deliveryAreaInfo = StreamSupport.stream(deliveryAreas.spliterator(), false)
+				.flatMap(deliveryArea -> deliveryArea.getCityDeliveryAreas().stream()
+						.map(cityDeliveryArea -> new CityMapInfo(
+								cityDeliveryArea.getCity().getCoords().getLatitude(),
+								cityDeliveryArea.getCity().getCoords().getLongitude(),
+								deliveryArea.getColor()
+						)))
+				.map(gson::toJson)
+				.collect(Collectors.toList());
+
+		model.addAttribute("deliveryAreaInfo", deliveryAreaInfo);
+		model.addAttribute("deliveryAreas", deliveryAreas);
 		model.addAttribute("page", "deliveryAreas");
 		return "common_page";
 	}
@@ -62,14 +88,10 @@ public class DeliveryAreaController {
 		long hours = 0;
 		long minutes = 0;
 		if (deliveryArea.getEstimatedTime() != null) {
-			var localTime = deliveryArea.getEstimatedTime().getTime();
-			days = localTime / (24 * 60 * 60 * 1000);
-			localTime = localTime % (24 * 60 * 60 * 1000);
-
-			hours = localTime / (60 * 60 * 1000);
-			localTime = localTime % (60 * 60 * 1000);
-
-			minutes = localTime / (60 * 1000);
+			var localTime = deliveryArea.getEstimatedTime();
+			days = Utils.estimatedDays(localTime);
+			hours = Utils.estimatedHours(localTime);
+			minutes = Utils.estimatedMinutes(localTime);
 		}
 
 		var cities = cityService.getCities();
@@ -117,8 +139,6 @@ public class DeliveryAreaController {
 			if (deliveryArea.getId() == 0) {
 				deliveryAreaService.save(deliveryArea, Collections.emptyList(), Collections.emptyList());
 			}
-
-			System.out.println(map);
 
 			var newCities = map.entrySet().stream()
 					.filter(entry -> entry.getKey().startsWith("newCity-"))

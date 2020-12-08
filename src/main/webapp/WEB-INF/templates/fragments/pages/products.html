@@ -1,9 +1,7 @@
 <title xmlns:th="http://www.thymeleaf.org" th:text="${category.getName()}" th:fragment="title">
-    <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
 </title>
 <th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
           th:fragment="content">
-    <!--/*@thymesVar id="category" type="org.fekz115.task8.domain.Category"*/-->
     <th:block th:with="products = ${category.getProducts()}" th:insert="fragments/pages/products :: productList">
 
     </th:block>
@@ -16,12 +14,9 @@
 
 <div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
      th:fragment="productList">
-    <!--/*@thymesVar id="products" type="java.lang.Iterable<org.fekz115.task8.domain.Product>"*/-->
-    <!--/*@thymesVar id="catalog" type="java.lang.Boolean"*/-->
     <table th:class="tableOfProducts">
         <tr>
             <th th:text="#{product_name}"></th>
-            <th th:text="#{description}"></th>
             <th th:text="#{price}"></th>
             <th:block sec:authorize="hasAuthority('ADMIN')">
                 <th></th>
@@ -36,7 +31,6 @@
             <td>
                 <a th:href="@{/product/{productId}(productId=${product.getId()})}" th:text="${product.getName()}"></a>
             </td>
-            <td th:text="${product.getDescription()}"></td>
             <td th:text="${product.getPrice()}"></td>
             <th:block sec:authorize="hasAuthority('ADMIN')">
                 <td th:class="aTDremoveAddStyle">
@@ -52,7 +46,8 @@
                       sec:authorize="hasAuthority('USER') && !hasAnyAuthority('ADMIN', 'MANAGER')">
                 <td th:class="tdAddToCart">
                     <input th:class="buttonAddToCart" th:size="1" type="button" th:value="#{add_to_cart}"
-                           th:data1="${product.getId()}" th:data2="${product.getName()}" th:data3="${product.getCost()}"
+                           th:data1="${product.getId()}" th:data2="${product.getName()}"
+                           th:data3="${product.getPrice()}"
                            onclick="addToCart(this.getAttribute('data1'), this.getAttribute('data2'), this.getAttribute('data3'));">
                 </td>
             </th:block>
