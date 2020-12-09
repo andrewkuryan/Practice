@@ -253,7 +253,7 @@ public class ProductController {
 			model.addAttribute("message", "Created successfully");
 		} catch (Exception e) {
 			System.out.println(e);
-			model.addAttribute("exception", e.getMessage() == null ? e.toString() : e.getMessage());
+			model.addAttribute("exception", e.getMessage());
 		}
 		return getAll(model);
 	}

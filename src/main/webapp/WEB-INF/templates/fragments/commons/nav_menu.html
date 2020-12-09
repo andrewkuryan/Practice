@@ -27,11 +27,9 @@
                 <a th:href="@{/user}" th:text="#{users}"></a>
             </li>
         </th:block>
-        <th:block sec:authorize="hasAuthority('MANAGER')">
-            <li>
-                <a th:href="@{/order}" th:text="#{orders}"></a>
-            </li>
-        </th:block>
+        <li sec:authorize="hasAnyAuthority('USER', 'ADMIN', 'MANAGER')">
+            <a th:href="@{/order}" th:text="#{orders}"></a>
+        </li>
         <th:block sec:authorize="!isAuthenticated()">
             <li style="float:right">
                 <div class="authDiv">

@@ -10,6 +10,4 @@ public interface OrderRepository {
     Order save(Order order);
 
     Optional<Order> findById(int id);
-
-    void deleteById(int id);
 }

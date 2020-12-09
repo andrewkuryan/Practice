@@ -7,7 +7,7 @@
     <div id="cartProductsInfo" style="display: none;" th:text="${cartProductsInfo}"></div>
 
     <div id="orderModal" class="modal">
-        <form class="modal-content" th:object="${order}" method="post" th:action="@{/order/create}">
+        <form class="modal-content" th:object="${order}" method="post" th:action="@{/order}">
             <input type="hidden" name="cartId" th:value="${cart.getId()}"/>
             <div id="progressBar" class="progress" style="visibility: hidden">
                 <div class="indeterminate"></div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="input-field">
-                <select onchange="onChangeDeliveryCity()" class="inputAuth" id="deliveryCity" name="deliveryCity">
+                <select onchange="onChangeDeliveryCity()" class="inputAuth" id="deliveryCity" name="deliveryCityId">
                     <option
                             th:each="deliveryCity: ${deliveryCities}"
                             th:text="${deliveryCity.getCity().getName()}"
@@ -32,6 +32,9 @@
                 </select>
                 <label for="deliveryCity">Delivery City</label>
             </div>
+
+            <div id="productDeliveryInfo" style="display: none"></div>
+
             <div class="input-field">
                 <input type="text" class="inputAuth" id="deliveryAddress" th:field="*{deliveryAddress}"/>
                 <label for="deliveryAddress">Delivery Address</label>
@@ -62,11 +65,15 @@
             const formData = new FormData();
             formData.append("cityId", cityId);
             formData.append("productIds", productIds);
+
             fetch('api/deliveryInfo', {
                 method: 'POST',
                 body: formData,
             }).then(res => res.json())
                 .then(result => {
+                    document.getElementById("productDeliveryInfo").innerHTML = result.productsDeliveryInfo
+                        .map(info => `<input type="hidden" name="product-${info.productId}" value="${info.deliveryAreaId}" />`)
+
                     result.productsDeliveryInfo.forEach(productInfo => {
                         const container = document.getElementById(`deliveryStatus-${productInfo.productId}`);
                         switch (productInfo.status) {
@@ -95,6 +102,7 @@
                     document.getElementById("progressBar").setAttribute('style', 'visibility: hidden');
                 })
                 .catch(() => {
+                    document.getElementById("productDeliveryInfo").innerHTML = '';
                     document.getElementById("submitOrder").setAttribute("disabled", "true");
                     document.getElementById("progressBar").setAttribute('style', 'visibility: hidden');
                 })

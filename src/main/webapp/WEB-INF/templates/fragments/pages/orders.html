@@ -7,43 +7,65 @@
 
     <table>
         <tr>
-            <th th:text="#{user}"></th>
+            <th>ID</th>
+            <th:block sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+                <th th:text="#{user}"></th>
+            </th:block>
             <th>City</th>
             <th th:text="#{address}"></th>
-            <th th:text="#{date}"></th>
+            <th>Created at</th>
             <th>Status</th>
-            <th:block sec:authorize="hasAuthority('MANAGER')">
-                <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.getId()}"></td>
+            <th:block sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+                <td th:text="${order.getCart().getUser().getLogin()}"></td>
             </th:block>
-        </tr>
-        <tr>
-            <td>Test</td>
-            <td>Gomel</td>
-            <td>Sovetskaya st.</td>
-            <td>08.12.2020 23:16</td>
-            <td>
-                <select id="selectStatus">
-                    <option selected>In review</option>
-                </select>
-            </td>
-            <td class="aTDremoveAddStyle">
-                <a class="aAddRemoveStyle" href="#">Accept</a>
-            </td>
-        </tr>
-        <!--<tr th:each="order : ${orders}">
-            <td th:text="${order.getUser().getLogin()}"></td>
-            <td>
-                <a th:href="@{/product/{productId}(productId=${order.getProduct().getId()})}" th:text="${order.getProduct().getName()}"></a>
-            </td>
-            <td th:text="${order.getAddress()}"></td>
-            <td th:text="${order.getOrderDate()}"></td>
-            <td th:text="${order.isReceived()}"></td>
-            <th:block sec:authorize="hasAuthority('MANAGER')">
-                <td>
-                    <a th:href="@{/order/mark/{id}(id=${order.getId()})}">Edit</a>
+            <td th:text="${order.getCityDeliveryArea().getCity().getName()}"></td>
+            <td th:text="${order.getDeliveryAddress()}"></td>
+            <td th:text="${T(org.fekz115.task8.util.Utils).formatTimestamp(order.getCreatedAt())}"></td>
+            <th:block sec:authorize="hasAuthority('USER') && !hasAnyAuthority('ADMIN', 'MANAGER')">
+                <td th:text="${order.getStatus()}"></td>
+                <td class="aTDremoveAddStyle">
+                    <a class="aAddRemoveStyle" th:href="@{/order/{id}/cancel(id=${order.getId()})}">Cancel</a>
                 </td>
             </th:block>
-        </tr>-->
+            <th:block sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+                <form th:id="${'statusForm-' + order.getId()}" method="post"
+                      th:action="@{/order/{id}/status(id=${order.getId()})}"></form>
+                <td>
+                    <select id="selectStatus" th:form="${'statusForm-' + order.getId()}" name="status">
+                        <option value="Pending" th:selected="${order.getStatus() == 'Pending'}">Pending</option>
+                        <option value="Declined" th:selected="${order.getStatus() == 'Declined'}">Declined</option>
+                        <option value="Canceled" th:selected="${order.getStatus() == 'Canceled'}">Canceled</option>
+                        <option value="Completed" th:selected="${order.getStatus() == 'Completed'}">Completed
+                        </option>
+                    </select>
+                </td>
+                <td class="aTDremoveAddStyle">
+                    <button type="submit"
+                            th:form="${'statusForm-' + order.getId()}"
+                            class="waves-effect waves-teal btn-flat">Accept
+                    </button>
+                </td>
+            </th:block>
+        </tr>
+
+        <!-- <tr>
+             <td>Test</td>
+             <td>Gomel</td>
+             <td>Sovetskaya st.</td>
+             <td>08.12.2020 23:16</td>
+             <td>
+                 <select id="selectStatus">
+                     <option selected>In review</option>
+                 </select>
+             </td>
+             <td class="aTDremoveAddStyle">
+                 <a class="aAddRemoveStyle" href="#">Accept</a>
+             </td>
+         </tr>-->
     </table>
 
 

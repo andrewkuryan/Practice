@@ -25,6 +25,10 @@ public class CartService {
 		return id == null ? Collections.emptyList() : repository.findByUserId(id);
 	}
 
+	public Optional<Cart> getById(Integer id) {
+		return repository.findById(id);
+	}
+
 	public Optional<Cart> getActiveCart(Optional<User> user) {
 		return user.flatMap(value -> StreamSupport.stream(getByUserId(value.getId()).spliterator(), false)
 				.filter(cart -> !cart.isOrdered())
