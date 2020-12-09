@@ -10,12 +10,11 @@
         <div id="specificationsInfo" style="display: none" th:text="${specificationsInfo}"></div>
 
         <input type="hidden" th:field="*{id}"/>
-        <div th:class="textRegistration" th:text="#{edit} + ' ' + ${category.getName()}"></div>
+        <div class="textRegistration" th:text="#{edit} + ' ' + ${category.getName()}"></div>
         <input type="hidden" name="categoryId" th:value="${category.getId()}"/>
 
         <div class="input-field">
-            <input th:class="inputAuth" type="text" id="name" th:field="*{name}"
-                   th:placeholder="#{product_name}"/>
+            <input class="inputAuth" type="text" id="name" th:field="*{name}"/>
             <label for="name">Name</label>
         </div>
 
@@ -25,19 +24,17 @@
                 <input type="file" name="images" id="photos" accept="image/*" multiple>
             </div>
             <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                <input class="file-path validate" type="text" placeholder="Upload one or more files"/>
             </div>
         </div>
 
         <div class="input-field">
-            <textarea class="inputAuth materialize-textarea" id="description" th:field="*{description}"
-                      th:placeholder="#{description}"></textarea>
+            <textarea class="inputAuth materialize-textarea" id="description" th:field="*{description}"></textarea>
             <label for="description">Description</label>
         </div>
 
         <div class="input-field">
-            <input th:class="inputAuth" type="number" step="0.01" id="price" th:field="*{price}"
-                   th:placeholder="#{price}"/>
+            <input class="inputAuth" type="number" step="0.01" id="price" th:field="*{price}"/>
             <label for="price">Price</label>
         </div>
 

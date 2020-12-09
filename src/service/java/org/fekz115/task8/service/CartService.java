@@ -36,4 +36,12 @@ public class CartService {
 
 		newProducts.forEach(cartProductRepository::save);
 	}
+
+	public Cart create(User user) {
+		Cart cart = new Cart();
+		cart.setUser(user);
+		cart.setOrdered(false);
+		cart.setTotalPrice(0.0);
+		return repository.save(cart);
+	}
 }

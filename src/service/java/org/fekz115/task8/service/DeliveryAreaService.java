@@ -29,6 +29,10 @@ public class DeliveryAreaService {
 		return id == null ? Optional.empty() : repository.findById(id);
 	}
 
+	public Optional<CityDeliveryArea> getCityById(Integer id) {
+		return id == null ? Optional.empty() : cityDeliveryAreaRepository.findById(id);
+	}
+
 	public void save(
 			DeliveryArea deliveryArea,
 			List<CityDeliveryArea> newCities,

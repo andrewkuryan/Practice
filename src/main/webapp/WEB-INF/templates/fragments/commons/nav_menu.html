@@ -1,9 +1,6 @@
 <div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
      th:fragment="nav_menu">
     <ul>
-        <li th:class="liWithImage">
-            <a th:href="@{/default_page}"><img th:src="@{images/lll.png}" th:class="logoClass"></a>
-        </li>
         <li sec:authorize="hasAuthority('ADMIN')">
             <a th:href="@{/category}" th:text="#{categories}"></a>
         </li>

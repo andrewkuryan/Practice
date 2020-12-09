@@ -66,4 +66,8 @@ public class ProductService {
 	public void remove(Product product) throws ServiceException {
 		repository.delete(product);
 	}
+
+	public Optional<Product> getById(Integer id) {
+		return repository.findById(id);
+	}
 }

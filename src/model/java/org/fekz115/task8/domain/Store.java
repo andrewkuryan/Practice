@@ -88,4 +88,14 @@ public class Store {
 	public void setProductStores(Set<ProductStore> productStores) {
 		this.productStores = productStores;
 	}
+
+	@Override
+	public String toString() {
+		return "Store{" +
+				"phone='" + phone + '\'' +
+				", address='" + address + '\'' +
+				", cityId=" + city.getId() +
+				", deliveryAreaId=" + (deliveryArea == null ? null : deliveryArea.getId()) +
+				'}';
+	}
 }

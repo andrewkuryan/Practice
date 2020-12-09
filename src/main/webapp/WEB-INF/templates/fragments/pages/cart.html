@@ -4,6 +4,103 @@
 <th:block xmlns:th="http://www.thymeleaf.org" th:fragment="content">
     <link rel="stylesheet" th:href="@{/styles/cart.css}">
 
+    <div id="cartProductsInfo" style="display: none;" th:text="${cartProductsInfo}"></div>
+
+    <div id="orderModal" class="modal">
+        <form class="modal-content" th:object="${order}" method="post" th:action="@{/order/create}">
+            <input type="hidden" name="cartId" th:value="${cart.getId()}"/>
+            <div id="progressBar" class="progress" style="visibility: hidden">
+                <div class="indeterminate"></div>
+            </div>
+            <div id="cartProductsBlock">
+                <div
+                        th:each="cartProduct : ${cart.getCartProducts()}"
+                        class="cartProductItem"
+                >
+                    <p th:text="${cartProduct.getProduct().getName()}"></p>
+                    <p th:text="${'$' + cartProduct.getProduct().getPrice()}"></p>
+                    <p th:id="${'deliveryStatus-' + cartProduct.getProduct().getId()}">No info</p>
+                </div>
+            </div>
+            <div class="input-field">
+                <select onchange="onChangeDeliveryCity()" class="inputAuth" id="deliveryCity" name="deliveryCity">
+                    <option
+                            th:each="deliveryCity: ${deliveryCities}"
+                            th:text="${deliveryCity.getCity().getName()}"
+                            th:value="${deliveryCity.getId()}"
+                    ></option>
+                </select>
+                <label for="deliveryCity">Delivery City</label>
+            </div>
+            <div class="input-field">
+                <input type="text" class="inputAuth" id="deliveryAddress" th:field="*{deliveryAddress}"/>
+                <label for="deliveryAddress">Delivery Address</label>
+            </div>
+
+            <div class="input-field estimatedTimeInfo">
+                <p>Estimated Time:</p>
+                <p id="estimatedTimeValue">N/A</p>
+            </div>
+
+            <button id="submitOrder" type="submit" th:text="#{accept}"
+                    class="btn waves-effect waves-teal ButtonAuth"></button>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        onChangeDeliveryCity();
+
+        function onChangeDeliveryCity() {
+            const select = document.getElementById("deliveryCity")
+            const cityId = select.value;
+
+            const productIds = JSON.parse(document.getElementById("cartProductsInfo").innerText)
+                .map(product => product.id);
+
+            document.getElementById("progressBar").setAttribute('style', 'visibility: visible');
+
+            const formData = new FormData();
+            formData.append("cityId", cityId);
+            formData.append("productIds", productIds);
+            fetch('api/deliveryInfo', {
+                method: 'POST',
+                body: formData,
+            }).then(res => res.json())
+                .then(result => {
+                    result.productsDeliveryInfo.forEach(productInfo => {
+                        const container = document.getElementById(`deliveryStatus-${productInfo.productId}`);
+                        switch (productInfo.status) {
+                            case 'In stock':
+                                container.setAttribute('style', 'color: green');
+                                container.innerHTML = 'In stock<i class="material-icons">done</i>';
+                                break;
+                            case 'In another delivery area':
+                                container.setAttribute('style', 'color: gray');
+                                container.innerHTML = 'In another delivery area<i class="material-icons">done</i>';
+                                break;
+                            case 'Not available':
+                                container.setAttribute('style', 'color: red');
+                                container.innerHTML = 'Not available<i class="material-icons">close</i>';
+                        }
+                    });
+
+                    if (result.productsDeliveryInfo.some(product => product.status === 'Not available')) {
+                        document.getElementById("submitOrder").setAttribute("disabled", "true");
+                    } else {
+                        document.getElementById("submitOrder").removeAttribute("disabled");
+                    }
+
+                    document.getElementById("estimatedTimeValue").innerText = result.estimatedTime;
+
+                    document.getElementById("progressBar").setAttribute('style', 'visibility: hidden');
+                })
+                .catch(() => {
+                    document.getElementById("submitOrder").setAttribute("disabled", "true");
+                    document.getElementById("progressBar").setAttribute('style', 'visibility: hidden');
+                })
+        }
+    </script>
+
     <table class="cartTable">
         <tr>
             <th th:text="#{product_name}"></th>
@@ -26,10 +123,12 @@
             </td>
         </tr>
     </table>
-    <div class="totalPriceBlock" th:text="${'Total price: $' + cart.getTotalPrice()}"></div>
+
+    <div class="totalPriceBlock"
+         th:text="${'Total price: ' + T(org.fekz115.task8.util.Utils).formatCurrency(cart.getTotalPrice())}"></div>
 
     <div th:class="centertDivCreateCategory">
-        <a href="#">Create Order</a>
+        <a class="modal-trigger" href="#orderModal">Create Order</a>
     </div>
 
 </th:block>

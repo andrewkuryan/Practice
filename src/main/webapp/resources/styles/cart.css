@@ -8,3 +8,81 @@
     font-size: large;
     color: #962c2c;
 }
+
+#orderModal .modal-content {
+    margin: 0;
+    padding: 24px 24px 42px 24px;
+}
+
+#orderModal .modal-content .progress {
+    margin: 0 0 12px 0;
+}
+
+#orderModal .modal-content .input-field {
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+#orderModal .modal-content .estimatedTimeInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#orderModal .modal-content .estimatedTimeInfo p {
+    margin: 0;
+    font-size: 16px;
+}
+
+#orderModal .modal-content .estimatedTimeInfo p:first-child {
+    text-transform: uppercase;
+}
+
+#orderModal .modal-content .estimatedTimeInfo p:last-child {
+    margin-left: 8px;
+}
+
+#orderModal .modal-content #cartProductsBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#orderModal .modal-content #cartProductsBlock .cartProductItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+#orderModal .modal-content #cartProductsBlock .cartProductItem p {
+    margin: 0;
+    font-size: 18px;
+}
+
+#orderModal .modal-content #cartProductsBlock .cartProductItem p:first-child {
+    width: 40%;
+}
+
+#orderModal .modal-content #cartProductsBlock .cartProductItem p:nth-child(2) {
+    width: 30%;
+}
+
+#orderModal .modal-content #cartProductsBlock .cartProductItem p:last-child {
+    width: 30%;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#orderModal .modal-content #cartProductsBlock .cartProductItem p:last-child i {
+    font-size: 24px;
+    margin-left: 8px;
+    margin-bottom: 3px;
+}

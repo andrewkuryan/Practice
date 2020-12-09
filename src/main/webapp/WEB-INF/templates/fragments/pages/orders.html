@@ -1,22 +1,36 @@
 <title xmlns:th="http://www.thymeleaf.org" th:text="#{orders}" th:fragment="title">
 </title>
 
-<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+          th:fragment="content">
     <!--/*@thymesVar id="orders" type="java.lang.Iterable<org.fekz115.task8.domain.Order>"*/-->
 
     <table>
         <tr>
             <th th:text="#{user}"></th>
-            <th th:text="#{product_name}"></th>
+            <th>City</th>
             <th th:text="#{address}"></th>
             <th th:text="#{date}"></th>
-            <th th:text="#{is_received}"></th>
+            <th>Status</th>
             <th:block sec:authorize="hasAuthority('MANAGER')">
-                <th></th>
                 <th></th>
             </th:block>
         </tr>
-        <tr th:each="order : ${orders}">
+        <tr>
+            <td>Test</td>
+            <td>Gomel</td>
+            <td>Sovetskaya st.</td>
+            <td>08.12.2020 23:16</td>
+            <td>
+                <select id="selectStatus">
+                    <option selected>In review</option>
+                </select>
+            </td>
+            <td class="aTDremoveAddStyle">
+                <a class="aAddRemoveStyle" href="#">Accept</a>
+            </td>
+        </tr>
+        <!--<tr th:each="order : ${orders}">
             <td th:text="${order.getUser().getLogin()}"></td>
             <td>
                 <a th:href="@{/product/{productId}(productId=${order.getProduct().getId()})}" th:text="${order.getProduct().getName()}"></a>
@@ -26,13 +40,10 @@
             <td th:text="${order.isReceived()}"></td>
             <th:block sec:authorize="hasAuthority('MANAGER')">
                 <td>
-                    <a th:href="@{/order/mark/{id}(id=${order.getId()})}" th:text="#{mark_received}"></a>
-                </td>
-                <td>
-                    <a th:href="@{/order/remove/{id}(id=${order.getId()})}" th:text="#{remove}"></a>
+                    <a th:href="@{/order/mark/{id}(id=${order.getId()})}">Edit</a>
                 </td>
             </th:block>
-        </tr>
+        </tr>-->
     </table>
 
 

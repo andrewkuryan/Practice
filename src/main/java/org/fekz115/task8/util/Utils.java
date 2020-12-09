@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 
 public class Utils {
 
+	public static String formatCurrency(double value) {
+		return String.format("$%.2f", value);
+	}
+
 	public static long estimatedDays(Time time) {
 		return time.getTime() / (24 * 60 * 60 * 1000);
 	}
