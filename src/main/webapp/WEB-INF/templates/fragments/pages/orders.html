@@ -5,6 +5,26 @@
           th:fragment="content">
     <!--/*@thymesVar id="orders" type="java.lang.Iterable<org.fekz115.task8.domain.Order>"*/-->
 
+    <div th:id="${'orderInfo-' + order.getId()}" class="modal" th:each="order : ${orders}">
+        <div class="modal-content">
+            <h5 style="width: 92%; margin-left: 4%; margin-right: 4%"
+                th:text="${'Order #' + order.getId()}"></h5>
+            <table>
+                <tr>
+                    <th th:text="#{product_name}"></th>
+                    <th th:text="#{price}"></th>
+                </tr>
+                <tr th:each="cartProduct : ${order.getCart().getCartProducts()}">
+                    <td>
+                        <a th:href="@{/product/{productId}(productId=${cartProduct.getProduct().getId()})}"
+                           th:text="${cartProduct.getProduct().getName()}"></a>
+                    </td>
+                    <td th:text="${cartProduct.getProduct().getPrice()}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
     <table>
         <tr>
             <th>ID</th>
@@ -18,7 +38,9 @@
             <th></th>
         </tr>
         <tr th:each="order : ${orders}">
-            <td th:text="${order.getId()}"></td>
+            <td>
+                <a class="modal-trigger" th:href="${'#orderInfo-' + order.getId()}" th:text="${order.getId()}"></a>
+            </td>
             <th:block sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
                 <td th:text="${order.getCart().getUser().getLogin()}"></td>
             </th:block>
@@ -28,7 +50,10 @@
             <th:block sec:authorize="hasAuthority('USER') && !hasAnyAuthority('ADMIN', 'MANAGER')">
                 <td th:text="${order.getStatus()}"></td>
                 <td class="aTDremoveAddStyle">
-                    <a class="aAddRemoveStyle" th:href="@{/order/{id}/cancel(id=${order.getId()})}">Cancel</a>
+                    <a class="aAddRemoveStyle"
+                       th:href="@{/order/{id}/cancel(id=${order.getId()})}"
+                       th:if="${order.getStatus() == 'Pending'}"
+                    >Cancel</a>
                 </td>
             </th:block>
             <th:block sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">

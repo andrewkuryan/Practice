@@ -61,8 +61,10 @@ public class StoreController {
 
 	@GetMapping
 	public String all(Model model) {
-		var cities = cityService.getCities();
-		List<String> formattedStores = StreamSupport.stream(cities.spliterator(), false)
+		var cities = StreamSupport.stream(cityService.getCities().spliterator(), false)
+				.filter(city -> city.getStores().size() > 0)
+				.collect(Collectors.toList());
+		List<String> formattedStores = cities.stream()
 				.flatMap(city -> city.getStores().stream()
 						.map(store -> gson.toJson(new StoreMapInfo(
 								store.getAddress(),

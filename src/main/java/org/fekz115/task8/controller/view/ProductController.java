@@ -98,7 +98,6 @@ public class ProductController {
 	public String getAll(Model model) {
 		model.addAttribute("categories", categoryService.getCategories());
 		model.addAttribute("page", "catalog");
-		model.addAttribute("catalog", true);
 		return "common_page";
 	}
 

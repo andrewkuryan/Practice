@@ -22,10 +22,6 @@
                 <th></th>
                 <th></th>
             </th:block>
-            <th:block th:if="${catalog != null}"
-                      sec:authorize="hasAuthority('USER') && !hasAnyAuthority('ADMIN', 'MANAGER')">
-                <th></th>
-            </th:block>
         </tr>
         <tr th:each="product : ${products}">
             <td>
@@ -40,15 +36,6 @@
                 <td th:class="aTDremoveAddStyle">
                     <a th:class="aAddRemoveStyle" th:href="@{/product/remove/{id}(id=${product.getId()})}"
                        th:text="#{remove}"></a>
-                </td>
-            </th:block>
-            <th:block th:if="${catalog != null}"
-                      sec:authorize="hasAuthority('USER') && !hasAnyAuthority('ADMIN', 'MANAGER')">
-                <td th:class="tdAddToCart">
-                    <input th:class="buttonAddToCart" th:size="1" type="button" th:value="#{add_to_cart}"
-                           th:data1="${product.getId()}" th:data2="${product.getName()}"
-                           th:data3="${product.getPrice()}"
-                           onclick="addToCart(this.getAttribute('data1'), this.getAttribute('data2'), this.getAttribute('data3'));">
                 </td>
             </th:block>
         </tr>
